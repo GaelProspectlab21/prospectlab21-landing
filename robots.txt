@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://prospectlab21.com/sitemap.xml

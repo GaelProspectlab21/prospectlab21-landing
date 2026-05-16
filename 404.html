@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>404 — ProspectLab21</title>
+<meta name="robots" content="noindex, follow">
+<meta name="theme-color" content="#000000">
+<link rel="icon" href="/assets/favicon.ico">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=JetBrains+Mono:wght@500&display=swap" media="print" onload="this.media='all'">
+<style>
+  *, *::before, *::after { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; min-height: 100vh; }
+  body {
+    background: #000; color: #fff;
+    font-family: "Space Grotesk", system-ui, -apple-system, "Helvetica Neue", Arial, sans-serif;
+    display: flex; align-items: center; justify-content: center;
+    padding: 24px;
+    -webkit-font-smoothing: antialiased;
+  }
+  .bg {
+    position: fixed; inset: 0; pointer-events: none; z-index: 0;
+    background-image:
+      linear-gradient(rgba(0,71,255,0.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0,71,255,0.05) 1px, transparent 1px),
+      radial-gradient(ellipse 60% 50% at 50% 50%, rgba(0,71,255,0.10), transparent 65%);
+    background-size: 80px 80px, 80px 80px, auto;
+    mask-image: radial-gradient(ellipse 90% 70% at 50% 50%, #000 35%, transparent 90%);
+    -webkit-mask-image: radial-gradient(ellipse 90% 70% at 50% 50%, #000 35%, transparent 90%);
+  }
+  .wrap { position: relative; z-index: 1; max-width: 720px; }
+  .eyebrow {
+    font-family: "JetBrains Mono", ui-monospace, Menlo, monospace;
+    font-size: 12px; letter-spacing: 0.24em; text-transform: uppercase;
+    color: #5c85ff; margin-bottom: 24px;
+    display: inline-flex; align-items: center; gap: 12px;
+  }
+  .eyebrow::before { content: ""; width: 24px; height: 1px; background: currentColor; }
+  h1 {
+    font-size: clamp(56px, 9vw, 112px);
+    font-weight: 700;
+    letter-spacing: -0.028em;
+    line-height: 1;
+    margin: 0 0 24px;
+  }
+  h1 span { color: #5c85ff; }
+  p {
+    font-family: "Inter", system-ui, sans-serif;
+    color: rgba(255,255,255,0.65);
+    font-size: 18px; line-height: 1.55;
+    max-width: 540px;
+    margin: 0 0 36px;
+  }
+  a.btn {
+    display: inline-flex; align-items: center; gap: 10px;
+    padding: 16px 24px;
+    background: #fff; color: #000;
+    font-family: "Space Grotesk", sans-serif;
+    font-size: 15px; font-weight: 600;
+    text-decoration: none;
+    border: 1px solid #fff;
+    transition: background 200ms ease, color 200ms ease, border-color 200ms ease;
+  }
+  a.btn:hover { background: #5c85ff; color: #fff; border-color: #5c85ff; }
+  a.btn svg { width: 16px; height: 16px; }
+  .brand {
+    position: absolute; top: 32px; left: 32px;
+    font-family: "Space Grotesk", sans-serif;
+    font-size: 14px; font-weight: 700;
+    letter-spacing: 0.08em;
+    color: rgba(255,255,255,0.9);
+    text-decoration: none;
+    display: inline-flex; align-items: center; gap: 10px;
+    z-index: 2;
+  }
+  .brand::before {
+    content: ""; width: 10px; height: 10px;
+    background: #5c85ff; border-radius: 50%;
+  }
+</style>
+</head>
+<body>
+<div class="bg" aria-hidden="true"></div>
+<a class="brand" href="/">PROSPECTLAB 21</a>
+<div class="wrap">
+  <div class="eyebrow">Error 404 · No encontrado</div>
+  <h1>Esta página<br>no <span>existe</span>.</h1>
+  <p>Te perdiste — o seguimos un enlace viejo. Lo importante está en la portada: cómo funciona, el sistema y la llamada de 20 min.</p>
+  <a class="btn" href="/">
+    Volver a la portada
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+  </a>
+</div>
+</body>
+</html>
