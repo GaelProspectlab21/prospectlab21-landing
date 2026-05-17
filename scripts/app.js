@@ -277,13 +277,13 @@
 
   /* ---------------- MAILS SECTION ---------------- */
   const MAIL_STEPS = [
-    { id: 'asunto',   num: '01 / ASUNTO',    title: '"vuestra ronda de junio"', body: 'Minúsculas, hiperconcreto. Suena a mensaje interno, no a marketing.' },
-    { id: 'apertura', num: '02 / APERTURA',  title: '"Marcos,"',                body: 'Sin "Hola". Rompe el patrón del 95% de cold emails que arrancan igual.' },
-    { id: 'gancho',   num: '03 / GANCHO',    title: 'Dato verificable',         body: 'Serie A + Lisboa demuestra research real. Imposible de copiar/pegar a otro lead.' },
-    { id: 'pain',     num: '04 / PAIN',      title: '"joder" — el momento clave', body: 'Aquí el email deja de sonar a empresa. Una interjección castellana baja la guardia del lead. Atreverse a sonar humano es lo que destaca entre 50 mails corporativos.' },
-    { id: 'cta',      num: '05 / CTA',       title: 'Auditoría gratis',         body: 'No pide reunión. Ofrece valor real que el lead querría aunque no comprara. Cuesta más decir no a algo gratis y útil.' },
-    { id: 'firma',    num: '06 / FIRMA',     title: '"Gael"',                   body: 'Solo el nombre. Mensaje entre personas, no entre empresas.' },
-    { id: 'pd',       num: '07 / PD',        title: 'Segunda señal de research', body: '"2 SDRs en Madrid" cierra el loop: gasto real → ahorro real.' }
+    { id: 'asunto',   num: '01 / ASUNTO',    title: 'Hiperconcreto, en minúsculas.',           body: 'Suena a mensaje interno, no a marketing. Eso solo ya dobla la tasa de apertura.' },
+    { id: 'apertura', num: '02 / APERTURA',  title: 'Sin "Hola". Solo el nombre.',             body: 'Rompemos el patrón del 95% de cold emails que arrancan igual. El cerebro del lead detecta la diferencia en 0,3 segundos.' },
+    { id: 'gancho',   num: '03 / GANCHO',    title: 'Dato verificable, no halago.',            body: 'Serie A + Lisboa demuestra research real. Imposible de copiar/pegar a otro lead — y eso es exactamente la señal.' },
+    { id: 'pain',     num: '04 / PAIN',      title: 'El momento humano.',                      body: 'Aquí el email deja de sonar a empresa. Atreverse a sonar humano es lo que destaca entre 50 correos corporativos del día.' },
+    { id: 'cta',      num: '05 / CTA',       title: 'Valor antes de pedir.',                   body: 'No pide reunión. Ofrece una auditoría real que el lead querría aunque no comprara. Cuesta más decir no a algo gratis y útil.' },
+    { id: 'firma',    num: '06 / FIRMA',     title: 'Una sola palabra.',                       body: 'Solo el nombre. Mensaje entre personas, no entre empresas.' },
+    { id: 'pd',       num: '07 / PD',        title: 'El cierre que casi nadie usa.',           body: '"2 SDRs en Madrid" cierra el loop: gasto real → ahorro real. La PD es el lugar más leído del email.' }
   ];
   const SPAM_INBOX = [
     { from: 'Newsletter Weekly',  subject: 'Edición #432: 17 cosas que…',           preview: 'Hola {first_name}, esta semana descubrirás…',           avatar: '#9aa3b2' },
@@ -378,8 +378,8 @@
     const txt = el('div', { class: 'mail-text' },
       el('p', { dataset: { anchor: 'apertura' } }, mkHL('apertura', 'Marcos,')),
       el('p', { dataset: { anchor: 'gancho' } }, mkHL('gancho', 'cerrasteis la Serie A y abrís Lisboa este trimestre.'), ' Menudo año.'),
-      el('p', { dataset: { anchor: 'pain' } }, 'Justo en esa fase la prospección manual revienta — ', mkHL('pain', 'joder'), ', hemos visto founders post-ronda perder 3 meses por eso. Montamos el cold email B2B punta a punta y agendamos reuniones con decisores sin que tu equipo toque un correo.'),
-      el('p', { dataset: { anchor: 'cta' } }, mkHL('cta', '¿Te paso una auditoría gratis del funnel de adquisición de Trackr?'), ' Te digo dónde estáis perdiendo reuniones y qué cambiaría.'),
+      el('p', { dataset: { anchor: 'pain' } }, 'Justo después de una ronda, la prospección manual revienta. ', mkHL('pain', 'Joder'), ', hemos visto founders perder 3 meses post-ronda por no levantar el outbound a tiempo. Lo nuestro: reuniones con decisores sin que tu equipo toque un correo.'),
+      el('p', { dataset: { anchor: 'cta' } }, mkHL('cta', '¿Te paso una auditoría gratis del outbound de Trackr?'), ' Sin venta — te digo dónde se os escapan reuniones.'),
       el('p', { dataset: { anchor: 'firma' } }, mkHL('firma', 'Gael')),
       el('p', { class: 'mail-pd', dataset: { anchor: 'pd' } }, mkHL('pd', 'PD: vi que buscáis 2 SDRs en Madrid. Justo lo que os ahorramos.'))
     );

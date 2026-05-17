@@ -33,3 +33,5 @@ dist-temp/
 screenshot-*.png
 _smoketest.py
 _screenshot.py
+
+.vercel
