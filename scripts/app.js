@@ -940,6 +940,51 @@
     document.addEventListener('mouseenter', () => { ring.classList.remove('is-out'); dot.classList.remove('is-out'); });
   }
 
+  /* ---------------- EVENT TRACKING ----------------
+     Vercel Web Analytics custom events. Fires only if Analytics is enabled
+     on the project — otherwise window.va is undefined and the calls no-op. */
+  function track(name, props) {
+    try { if (window.va) window.va('event', { name, ...(props ? { props } : {}) }); } catch (_) {}
+  }
+  function setupEventTracking() {
+    // CTA → cal.com (3 locations: nav, hero, final CTA section)
+    const locFor = (a) => {
+      if (a.closest('.nav-cta'))   return 'nav';
+      if (a.closest('.cta-btn'))   return 'cta-section';
+      if (a.closest('.hero-ctas')) return 'hero';
+      return 'unknown';
+    };
+    document.addEventListener('click', (e) => {
+      const a = e.target.closest && e.target.closest('a[href*="cal.com/gael-prospectlab21"]');
+      if (a) track('cta_click', { location: locFor(a) });
+      const m = e.target.closest && e.target.closest('a[href^="mailto:gael@prospectlab21.com"]');
+      if (m) track('email_click', { location: m.closest('.footer-links') ? 'footer' : 'cta-alt' });
+    }, { passive: true });
+
+    // FAQ opens — which questions get expanded
+    document.addEventListener('click', (e) => {
+      const btn = e.target.closest && e.target.closest('.faq-question');
+      if (btn && btn.getAttribute('aria-expanded') === 'false') {
+        const q = (btn.querySelector('.faq-q-text') || {}).textContent || '';
+        track('faq_open', { question: q.slice(0, 80) });
+      }
+    }, { passive: true });
+
+    // Section reveal — fires once per section as user scrolls
+    const seenSections = new Set();
+    const sIo = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (!e.isIntersecting) return;
+        const id = e.target.id || (e.target.className.match(/(\w+)-section/) || [])[1];
+        if (id && !seenSections.has(id)) {
+          seenSections.add(id);
+          track('section_view', { section: id });
+        }
+      });
+    }, { threshold: 0.5 });
+    $$('section[id], section[class*="-section"]').forEach(s => sIo.observe(s));
+  }
+
   /* ---------------- BOOT ---------------- */
   function boot() {
     const root = $('#root');
@@ -959,6 +1004,7 @@
     root.appendChild(Footer());
 
     setupCursor();
+    setupEventTracking();
 
     // Smooth scroll polyfill for older Safari iOS
     if (!('scrollBehavior' in document.documentElement.style)) {
