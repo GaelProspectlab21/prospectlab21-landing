@@ -64,7 +64,7 @@
   function Nav() {
     const header = el('header', { class: 'nav dark', id: 'site-nav' },
       el('a', { class: 'nav-brand', href: '#top', 'aria-label': 'ProspectLab21 — Inicio' },
-        el('img', { src: 'assets/logo-mark.png', alt: '', width: 26, height: 26, loading: 'eager', decoding: 'sync' }),
+        el('img', { src: 'assets/logo-mark.png', alt: '', width: 26, height: 26, loading: 'eager', decoding: 'sync', fetchpriority: 'high' }),
         el('span', {}, 'PROSPECTLAB 21')
       ),
       el('nav', { class: 'nav-links', 'aria-label': 'Navegación principal' },
@@ -470,11 +470,19 @@
       )
     );
 
-    // Cinematic state — bullets only reveal AFTER mail opens
+    // Cinematic state — bullets only reveal AFTER mail opens.
+    // While `lockActiveObs` is true, the active step is pinned to 'asunto'
+    // so the user always sees bullet 01 first when the email opens,
+    // regardless of where scroll position landed during the cinematic.
     let phase = 'idle';
+    let lockActiveObs = false;
     const seen = new Set();
     const revealSeen = () => {
       stepEls.forEach(n => { if (seen.has(n.dataset.stepid)) n.classList.add('is-in'); });
+    };
+    const forceActive = (id) => {
+      mock.setActive(id);
+      stepEls.forEach(n => n.classList.toggle('active', n.dataset.stepid === id));
     };
 
     // Trigger cinematic once when section enters viewport
@@ -489,10 +497,16 @@
         setTimeout(() => {
           phase = 'open';
           mock.setPhase('open');
-          mock.setActive('asunto');
-          // First bullet snaps in synced with mail open. Rest cascade by IO.
+          // PIN bullet 01 for ~2.6s so the user reads from the start
+          lockActiveObs = true;
+          forceActive('asunto');
           if (stepEls[0]) stepEls[0].classList.add('is-in');
           revealSeen();
+          // Gently bring bullet 01 into the reading band
+          if (stepEls[0]) {
+            try { stepEls[0].scrollIntoView({ behavior: 'smooth', block: 'center' }); } catch (_) {}
+          }
+          setTimeout(() => { lockActiveObs = false; }, 2600);
         }, 2700);
         cinematicIo.disconnect();
       });
@@ -510,14 +524,14 @@
     }, { rootMargin: '0px 0px -20% 0px', threshold: 0.15 });
 
     // Active observer — drives mail highlight from whatever step is in the band.
-    // Only acts once the mail is open; before that the bullets are hidden anyway.
+    // Locked during the first ~2.6s after open so 'asunto' stays pinned.
     const activeObs = new IntersectionObserver((entries) => {
-      if (phase !== 'open') return;
+      if (phase !== 'open' || lockActiveObs) return;
       const visible = entries.filter(e => e.isIntersecting);
       if (!visible.length) return;
       visible.sort((a, b) => b.intersectionRatio - a.intersectionRatio);
       const id = visible[0].target.dataset.stepid;
-      if (id) { mock.setActive(id); stepEls.forEach(n => n.classList.toggle('active', n.dataset.stepid === id)); }
+      if (id) forceActive(id);
     }, { rootMargin: '-45% 0px -45% 0px', threshold: 0 });
     stepEls.forEach(n => { revealObs.observe(n); activeObs.observe(n); });
 
