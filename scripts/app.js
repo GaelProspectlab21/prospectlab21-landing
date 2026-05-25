@@ -297,7 +297,7 @@
     { from: 'Stripe',             subject: 'Your invoice for May 2026',             preview: 'Thanks for your business. Amount due: €0.00',          avatar: '#635bff' },
     { from: 'Bro from Bali',      subject: 'quick question 👀',                     preview: 'Hey man, hope you’re crushing it! Quick favor…',   avatar: '#f4b942' }
   ];
-  const OUR_MAIL = { from: 'Gael — ProspectLab21', subject: 'vuestra ronda de junio', preview: 'Marcos, cerrasteis la Serie A y abrís Lisboa este trimestre. Menudo año…', avatar: '#0047ff' };
+  const OUR_MAIL = { from: 'Gael — ProspectLab21', subject: 'su ronda de junio', preview: 'Marcos, cerraron la Serie A y abren CDMX este trimestre. Tremendo año…', avatar: '#4B0082' };
   const INBOX_ORDER = (() => {
     const list = SPAM_INBOX.map(r => ({ ...r, kind: 'spam' }));
     list.splice(2, 0, { ...OUR_MAIL, kind: 'ours' });
@@ -374,14 +374,14 @@
 
     const mkHL = (id, text) => el('span', { class: 'mail-hl', dataset: { hl: id } }, text);
 
-    const subjectEl = el('div', { class: 'mail-subject', dataset: { anchor: 'asunto' } }, mkHL('asunto', 'vuestra ronda de junio'));
+    const subjectEl = el('div', { class: 'mail-subject', dataset: { anchor: 'asunto' } }, mkHL('asunto', 'su ronda de junio'));
     const txt = el('div', { class: 'mail-text' },
       el('p', { dataset: { anchor: 'apertura' } }, mkHL('apertura', 'Marcos,')),
-      el('p', { dataset: { anchor: 'gancho' } }, mkHL('gancho', 'cerrasteis la Serie A y abrís Lisboa este trimestre.'), ' Menudo año.'),
-      el('p', { dataset: { anchor: 'pain' } }, 'Justo después de una ronda, la prospección manual revienta. ', mkHL('pain', 'Joder'), ', hemos visto founders perder 3 meses post-ronda por no levantar el outbound a tiempo. Lo nuestro: reuniones con decisores sin que tu equipo toque un correo.'),
-      el('p', { dataset: { anchor: 'cta' } }, mkHL('cta', '¿Te paso una auditoría gratis del outbound de Trackr?'), ' Sin venta — te digo dónde se os escapan reuniones.'),
+      el('p', { dataset: { anchor: 'gancho' } }, mkHL('gancho', 'cerraron la Serie A y abren CDMX este trimestre.'), ' Tremendo año.'),
+      el('p', { dataset: { anchor: 'pain' } }, 'Justo después de una ronda, la prospección manual se cae sola. ', mkHL('pain', 'Neta'), ', hemos visto founders perder 3 meses post-ronda por no prender el outbound a tiempo. Lo nuestro: reuniones con decisores sin que tu equipo toque un mail.'),
+      el('p', { dataset: { anchor: 'cta' } }, mkHL('cta', '¿Te aviento una auditoría gratis del outbound de Trackr?'), ' Sin venta — te digo dónde se les están escapando reuniones.'),
       el('p', { dataset: { anchor: 'firma' } }, mkHL('firma', 'Gael')),
-      el('p', { class: 'mail-pd', dataset: { anchor: 'pd' } }, mkHL('pd', 'PD: vi que buscáis 2 SDRs en Madrid. Justo lo que os ahorramos.'))
+      el('p', { class: 'mail-pd', dataset: { anchor: 'pd' } }, mkHL('pd', 'PD: vi que andan buscando 2 SDRs en Monterrey. Justo lo que les ahorramos.'))
     );
     mailInner.appendChild(subjectEl);
     mailInner.appendChild(txt);
@@ -513,15 +513,19 @@
     }, { threshold: 0.28 });
     cinematicIo.observe(section);
 
-    // Reveal observer — marks as "seen" always; flips .is-in only once phase=open
+    // Reveal observer — flips .is-in as soon as the bullet enters the viewport.
+    // We deliberately do NOT wait for the cinematic to reach phase='open' because
+    // that creates a dead-zone if the user scrolls fast during the 2.7s opening:
+    // bullets fired their intersection event while phase was still 'falling/highlight/opening'
+    // and never came back into view to fire again — leaving them stuck at opacity:0.
     const revealObs = new IntersectionObserver((entries) => {
       entries.forEach(e => {
         if (!e.isIntersecting) return;
         const id = e.target.dataset.stepid;
         seen.add(id);
-        if (phase === 'open') e.target.classList.add('is-in');
+        e.target.classList.add('is-in');
       });
-    }, { rootMargin: '0px 0px -20% 0px', threshold: 0.15 });
+    }, { rootMargin: '0px 0px -12% 0px', threshold: 0.1 });
 
     // Active observer — drives mail highlight from whatever step is in the band.
     // Locked during the first ~2.6s after open so 'asunto' stays pinned.
@@ -671,6 +675,100 @@
     );
   }
 
+  /* ---------------- XRAY — MICRO-SAAS LEAD MAGNET ----------------
+     Free DNS audit at audit.prospectlab21.com. Acts as a low-friction
+     entry point for cold visitors that aren't ready to book a call yet. */
+  const XRAY_URL = 'https://audit.prospectlab21.com';
+  function XraySection() {
+    const checks = [
+      { k: 'SPF',   d: 'Detecta política débil (~all vs -all) y registros rotos.' },
+      { k: 'DKIM',  d: 'Prueba 28 selectores en paralelo. Si falta, te lo decimos.' },
+      { k: 'DMARC', d: 'p=none, quarantine o reject. Te decimos a cuál subir.' },
+      { k: 'MX',    d: 'Verificamos que el dominio realmente reciba correo.' }
+    ];
+
+    const score = el('div', { class: 'xray-score', 'aria-hidden': 'true' },
+      svg('svg', { viewBox: '0 0 120 120', class: 'xray-ring' },
+        svg('circle', { cx: 60, cy: 60, r: 52, class: 'xr-track' }),
+        svg('circle', { cx: 60, cy: 60, r: 52, class: 'xr-fill' })
+      ),
+      el('div', { class: 'xray-score-num' },
+        el('span', { class: 'xs-big' }, '78'),
+        el('span', { class: 'xs-slash' }, '/100')
+      ),
+      el('div', { class: 'xray-score-label' }, 'Tu dominio · ahora')
+    );
+
+    const list = el('ul', { class: 'xray-checks', role: 'list' });
+    checks.forEach((c, i) => {
+      list.appendChild(el('li', { class: 'xray-check', style: { '--xd': (i * 80) + 'ms' } },
+        el('span', { class: 'xc-tick', 'aria-hidden': 'true' }),
+        el('div', { class: 'xc-body' },
+          el('span', { class: 'xc-k' }, c.k),
+          el('span', { class: 'xc-d' }, c.d)
+        )
+      ));
+    });
+
+    const section = el('section', { class: 'xray-section', id: 'xray' },
+      el('div', { class: 'xray-bg', 'aria-hidden': 'true' }),
+      el('div', { class: 'section-inner xray-inner' },
+        el('div', { class: 'xray-grid' },
+          el('div', { class: 'xray-copy' },
+            el('div', { class: 'xray-eyebrow' },
+              el('span', { class: 'xray-eyebrow-dot' }),
+              'Gratis · sin registro · 30 segundos'
+            ),
+            el('h2', { class: 'xray-title' },
+              '¿Tu dominio está listo ',
+              el('span', { class: 'xray-title-accent' }, 'para enviar'),
+              ' cold email?'
+            ),
+            el('p', { class: 'xray-lead' },
+              'Antes de gastar un peso en outbound, te conviene saber si tu DNS aguanta. Pega tu dominio y en 30 segundos te damos un score real, los problemas que tienes y un plan a 90 días para arreglarlos.'
+            ),
+            el('div', { class: 'xray-ctas' },
+              el('a', { class: 'xray-btn xray-btn-primary', href: XRAY_URL, target: '_blank', rel: 'noopener' },
+                'Auditar mi dominio gratis',
+                Icon('arrow-ur', 16)
+              ),
+              el('span', { class: 'xray-domain-hint' }, 'audit.prospectlab21.com')
+            ),
+            el('div', { class: 'xray-bullets' },
+              el('span', { class: 'xray-bullet' }, '· Score 0–100 al instante'),
+              el('span', { class: 'xray-bullet' }, '· Plan 90 días a tu medida'),
+              el('span', { class: 'xray-bullet' }, '· PDF descargable')
+            )
+          ),
+          el('div', { class: 'xray-card' },
+            el('div', { class: 'xray-card-head' },
+              el('div', { class: 'xray-window-dots', 'aria-hidden': 'true' },
+                el('span'), el('span'), el('span')
+              ),
+              el('span', { class: 'xray-card-url' }, 'audit.prospectlab21.com / tudominio.com')
+            ),
+            el('div', { class: 'xray-card-body' },
+              score,
+              list
+            ),
+            el('div', { class: 'xray-card-foot' },
+              el('span', { class: 'xray-pill' }, '12 issues detectados'),
+              el('span', { class: 'xray-pill xray-pill-cta' }, 'Plan 90 días →')
+            )
+          )
+        )
+      )
+    );
+
+    // Reveal once
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) { section.classList.add('is-in'); io.disconnect(); } });
+    }, { threshold: 0.25 });
+    io.observe(section);
+
+    return section;
+  }
+
   /* ---------------- MAQUINARIA (WOW SECTION v2) ----------------
      Pipeline visualization: 6 abstract nodes connected by animated dots.
      Replaces the metric dashboard — competence without numerical claims. */
@@ -768,24 +866,52 @@
             el('div', { class: 'sobre-portrait-tag' },
               el('div', { class: 'signature' }, 'Gael'),
               'FUNDADOR / CEO · 13'
+            ),
+            el('div', { class: 'sobre-portrait-badge', 'aria-hidden': 'true' },
+              el('span', { class: 'spb-dot' }),
+              'EN OPERACIÓN'
             )
           ),
           el('dl', { class: 'sobre-credentials' },
-            el('div', { class: 'sc-row' }, el('dt', {}, 'Nombre'),   el('dd', {}, 'Gael')),
+            el('div', { class: 'sc-row' }, el('dt', {}, 'Nombre'),   el('dd', {}, 'Gael Sosa')),
             el('div', { class: 'sc-row' }, el('dt', {}, 'Rol'),      el('dd', {}, 'Fundador & CEO')),
             el('div', { class: 'sc-row' }, el('dt', {}, 'Edad'),     el('dd', {}, '13 años')),
+            el('div', { class: 'sc-row' }, el('dt', {}, 'Base'),     el('dd', {}, 'Zapopan, MX')),
+            el('div', { class: 'sc-row' }, el('dt', {}, 'Opera en'), el('dd', {}, 'ES · MX · LATAM')),
             el('div', { class: 'sc-row' }, el('dt', {}, 'Enfoque'),  el('dd', {}, 'Cold email B2B'))
           )
         ),
         el('div', { class: 'sobre-content' },
           el('h3', { class: 'sobre-greeting' }, 'Hey, soy ', el('span', { class: 'sobre-name' }, 'Gael'), '.'),
           el('div', { class: 'sobre-bio' },
-            el('p', { class: 'sobre-lead' }, 'Soy un emprendedor joven obsesionado con una cosa: conectar negocios con los decisores que ', el('em', {}, 'realmente'), ' mueven el juego — a través de cold email ejecutado con precisión.'),
+            el('p', { class: 'sobre-lead' },
+              'Tengo 13 años y opero una agencia de cold email B2B real, con clientes reales, desde Zapopan. La edad no la uso como gimmick — la uso como ventaja: ',
+              el('em', {}, 'velocidad de ejecución'), ' que casi nadie en este mercado tiene.'
+            ),
             el('blockquote', { class: 'sobre-credo' },
               el('p', {}, 'No creo en la suerte.'),
               el('p', {}, 'Creo en sistemas bien construidos y ejecución constante.')
             ),
-            el('p', { class: 'sobre-discipline' }, 'Trabajo con disciplina, enfoque y mentalidad de largo plazo.')
+            el('p', { class: 'sobre-discipline' },
+              'Mantengo el pipeline técnico yo mismo: Apify, Smartlead, Python, deliverability. Cada lead enriquecido, cada secuencia escrita, cada bandeja monitoreada — lo veo con mis ojos antes de que lo veas tú.'
+            )
+          ),
+          el('div', { class: 'sobre-pillars', 'aria-label': 'Filosofía operativa' },
+            el('div', { class: 'sp-card' },
+              el('span', { class: 'sp-num' }, '01'),
+              el('h5', {}, 'Ejecución'),
+              el('p', {}, 'Las ideas valen cero. El volumen y la velocidad resuelven el 90% de los problemas.')
+            ),
+            el('div', { class: 'sp-card' },
+              el('span', { class: 'sp-num' }, '02'),
+              el('h5', {}, 'Control'),
+              el('p', {}, 'Energía solo a lo que controlo: mis decisiones, mi sistema, mi ejecución. El resto es ruido.')
+            ),
+            el('div', { class: 'sp-card' },
+              el('span', { class: 'sp-num' }, '03'),
+              el('h5', {}, 'Nadie viene'),
+              el('p', {}, 'Nadie va a venir a salvarte. Por eso construyo sistemas que funcionen aunque yo no esté pegado al teclado.')
+            )
           ),
           el('p', { class: 'sobre-punch' }, 'No prometo magia.'),
           el('div', { class: 'sobre-principles', 'aria-label': 'Principios' },
@@ -997,6 +1123,7 @@
     root.appendChild(MailsSection());
     root.appendChild(ComoLoHago());
     root.appendChild(PorqueNuncaMuere());
+    root.appendChild(XraySection());
     root.appendChild(Maquinaria());
     root.appendChild(SobreMi());
     root.appendChild(FAQ());
