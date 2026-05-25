@@ -4,6 +4,7 @@
   'use strict';
 
   const CAL_URL = 'https://cal.com/gael-prospectlab21/15min';
+  const XRAY_URL = 'https://audit.prospectlab21.com';
 
   const $ = (sel, root = document) => root.querySelector(sel);
   const $$ = (sel, root = document) => Array.from(root.querySelectorAll(sel));
@@ -244,7 +245,11 @@
       'Operamos como un robot que no duerme: 24/7 segmentando cuentas hasta el último filtro, afinando secuencias y manteniendo la bandeja limpia. Tú recibes reuniones calificadas en el calendario, no clicks.');
     const ctas = el('div', { class: 'hero-ctas intro-fade', style: { transitionDelay: '1280ms' } },
       el('a', { href: CAL_URL, target: '_blank', rel: 'noopener', class: 'btn btn-primary' }, 'Agenda una llamada', Icon('arrow-right', 16)),
-      el('a', { href: '#mails', class: 'btn btn-ghost' }, 'Ver cómo trabajamos')
+      el('a', { href: XRAY_URL, target: '_blank', rel: 'noopener', class: 'btn btn-audit' },
+        el('span', { class: 'btn-audit-dot', 'aria-hidden': 'true' }),
+        'Auditar mi dominio',
+        el('span', { class: 'btn-audit-free' }, 'gratis')
+      )
     );
 
     const copy = el('div', { class: 'hero-copy' }, eyebrow, h1, sub, ctas);
@@ -678,7 +683,6 @@
   /* ---------------- XRAY — MICRO-SAAS LEAD MAGNET ----------------
      Free DNS audit at audit.prospectlab21.com. Acts as a low-friction
      entry point for cold visitors that aren't ready to book a call yet. */
-  const XRAY_URL = 'https://audit.prospectlab21.com';
   function XraySection() {
     const checks = [
       { k: 'SPF',   d: 'Detecta política débil (~all vs -all) y registros rotos.' },
@@ -990,7 +994,14 @@
         el('div', { class: 'cta-eyebrow' }, 'Empezamos aquí'),
         el('h2', {}, 'Vamos por', el('br'), 'tu primer mail.'),
         el('p', { class: 'cta-sub' }, 'Una llamada de 20 minutos. Te digo si tu producto encaja con lo que hacemos — y si no, te paso a alguien que sí.'),
-        el('a', { class: 'cta-btn', href: CAL_URL, target: '_blank', rel: 'noopener' }, 'Agenda una llamada', el('span', { class: 'arrow' }, Icon('arrow-ur', 20))),
+        el('div', { class: 'cta-btn-row' },
+          el('a', { class: 'cta-btn', href: CAL_URL, target: '_blank', rel: 'noopener' }, 'Agenda una llamada', el('span', { class: 'arrow' }, Icon('arrow-ur', 20))),
+          el('a', { class: 'cta-btn cta-btn-audit', href: XRAY_URL, target: '_blank', rel: 'noopener' },
+            el('span', { class: 'cta-btn-audit-dot', 'aria-hidden': 'true' }),
+            'Auditar mi dominio',
+            el('span', { class: 'cta-btn-audit-free' }, 'gratis')
+          )
+        ),
         el('div', { class: 'cta-meta' },
           el('span', {}, '· 20 MIN'),
           el('span', {}, '· SIN COMPROMISO'),
