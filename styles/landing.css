@@ -2808,17 +2808,61 @@ html.has-pl-cursor [contenteditable="true"] { cursor: text !important; }
 
 /* Card mockup */
 .xray-card {
+  position: relative;
   background: #fff;
   border-radius: 18px;
   border: 1px solid rgba(0,0,0,0.10);
   box-shadow:
     0 1px 0 rgba(0,0,0,0.02),
     0 32px 80px -24px rgba(75,0,130,0.28);
-  overflow: hidden;
+  overflow: visible;
   opacity: 0;
   transform: translateY(28px);
   transition: opacity 800ms var(--ease-standard) 80ms, transform 800ms var(--ease-standard) 80ms;
 }
+.xray-card-stamp {
+  position: absolute;
+  top: -22px; right: -22px;
+  width: 92px; height: 92px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #4B0082, #7C3AED);
+  color: #fff;
+  display: grid; place-items: center;
+  text-align: center;
+  transform: rotate(8deg);
+  box-shadow:
+    0 0 0 6px #fff,
+    0 14px 32px -10px rgba(75,0,130,0.6);
+  z-index: 3;
+  animation: xcs-wobble 5.5s ease-in-out infinite;
+}
+.xray-card-stamp::before {
+  content: ""; position: absolute; inset: 6px;
+  border: 1px dashed rgba(255,255,255,0.5);
+  border-radius: 50%;
+  pointer-events: none;
+}
+.xcs-zero {
+  font-family: var(--font-display);
+  font-size: 32px;
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  line-height: 1;
+}
+.xcs-label {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  margin-top: 2px;
+  opacity: 0.85;
+}
+@keyframes xcs-wobble {
+  0%, 100% { transform: rotate(8deg); }
+  50%      { transform: rotate(-4deg); }
+}
+.xray-card-head { border-radius: 18px 18px 0 0; }
+.xray-card-foot { border-radius: 0 0 18px 18px; }
 .xray-section.is-in .xray-card { opacity: 1; transform: translateY(0); }
 .xray-card-head {
   display: flex; align-items: center; gap: 12px;

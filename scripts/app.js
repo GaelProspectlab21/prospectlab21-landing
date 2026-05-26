@@ -247,8 +247,8 @@
       el('a', { href: CAL_URL, target: '_blank', rel: 'noopener', class: 'btn btn-primary' }, 'Agenda una llamada', Icon('arrow-right', 16)),
       el('a', { href: XRAY_URL, target: '_blank', rel: 'noopener', class: 'btn btn-audit' },
         el('span', { class: 'btn-audit-dot', 'aria-hidden': 'true' }),
-        'Auditar mi dominio',
-        el('span', { class: 'btn-audit-free' }, 'gratis')
+        'Reporte de mi outreach',
+        el('span', { class: 'btn-audit-free' }, 'sin costo')
       )
     );
 
@@ -685,10 +685,10 @@
      entry point for cold visitors that aren't ready to book a call yet. */
   function XraySection() {
     const checks = [
-      { k: 'SPF',   d: 'Detecta política débil (~all vs -all) y registros rotos.' },
-      { k: 'DKIM',  d: 'Prueba 28 selectores en paralelo. Si falta, te lo decimos.' },
-      { k: 'DMARC', d: 'p=none, quarantine o reject. Te decimos a cuál subir.' },
-      { k: 'MX',    d: 'Verificamos que el dominio realmente reciba correo.' }
+      { k: 'Infraestructura', d: 'SPF, DKIM, DMARC y MX revisados en vivo. Te decimos exactamente qué arreglar.' },
+      { k: 'Deliverability',  d: 'Si tu dominio aguanta volumen real o se te va a quemar al tercer envío.' },
+      { k: 'Posicionamiento',  d: 'Cómo te ves frente a tu ICP — qué dice tu web, tu LinkedIn y tu firma.' },
+      { k: 'Plan 90 días',    d: 'Roadmap concreto: qué arreglar esta semana, este mes y este trimestre.' }
     ];
 
     const score = el('div', { class: 'xray-score', 'aria-hidden': 'true' },
@@ -700,7 +700,7 @@
         el('span', { class: 'xs-big' }, '78'),
         el('span', { class: 'xs-slash' }, '/100')
       ),
-      el('div', { class: 'xray-score-label' }, 'Tu dominio · ahora')
+      el('div', { class: 'xray-score-label' }, 'Tu outreach · ahora')
     );
 
     const list = el('ul', { class: 'xray-checks', role: 'list' });
@@ -721,43 +721,48 @@
           el('div', { class: 'xray-copy' },
             el('div', { class: 'xray-eyebrow' },
               el('span', { class: 'xray-eyebrow-dot' }),
-              'Gratis · sin registro · 30 segundos'
+              '100% sin costo · sin tarjeta · sin registro'
             ),
             el('h2', { class: 'xray-title' },
-              '¿Tu dominio está listo ',
-              el('span', { class: 'xray-title-accent' }, 'para enviar'),
-              ' cold email?'
+              'Reporte completo de tu ',
+              el('span', { class: 'xray-title-accent' }, 'cold outreach'),
+              '. Gratis.'
             ),
             el('p', { class: 'xray-lead' },
-              'Antes de gastar un peso en outbound, te conviene saber si tu DNS aguanta. Pega tu dominio y en 30 segundos te damos un score real, los problemas que tienes y un plan a 90 días para arreglarlos.'
+              'No es solo un check de DNS. Es un rayos X completo de tu outreach: infraestructura, deliverability, cómo te ves frente a tu ICP y un plan a 90 días para que cada envío valga la pena. Sin costo, sin registro, en 30 segundos.'
             ),
             el('div', { class: 'xray-ctas' },
               el('a', { class: 'xray-btn xray-btn-primary', href: XRAY_URL, target: '_blank', rel: 'noopener' },
-                'Auditar mi dominio gratis',
+                'Quiero mi reporte gratis',
                 Icon('arrow-ur', 16)
               ),
               el('span', { class: 'xray-domain-hint' }, 'audit.prospectlab21.com')
             ),
             el('div', { class: 'xray-bullets' },
+              el('span', { class: 'xray-bullet' }, '· $0 — siempre'),
               el('span', { class: 'xray-bullet' }, '· Score 0–100 al instante'),
               el('span', { class: 'xray-bullet' }, '· Plan 90 días a tu medida'),
               el('span', { class: 'xray-bullet' }, '· PDF descargable')
             )
           ),
           el('div', { class: 'xray-card' },
+            el('div', { class: 'xray-card-stamp', 'aria-hidden': 'true' },
+              el('span', { class: 'xcs-zero' }, '$0'),
+              el('span', { class: 'xcs-label' }, 'siempre')
+            ),
             el('div', { class: 'xray-card-head' },
               el('div', { class: 'xray-window-dots', 'aria-hidden': 'true' },
                 el('span'), el('span'), el('span')
               ),
-              el('span', { class: 'xray-card-url' }, 'audit.prospectlab21.com / tudominio.com')
+              el('span', { class: 'xray-card-url' }, 'audit.prospectlab21.com / tuempresa.com')
             ),
             el('div', { class: 'xray-card-body' },
               score,
               list
             ),
             el('div', { class: 'xray-card-foot' },
-              el('span', { class: 'xray-pill' }, '12 issues detectados'),
-              el('span', { class: 'xray-pill xray-pill-cta' }, 'Plan 90 días →')
+              el('span', { class: 'xray-pill' }, 'Reporte completo'),
+              el('span', { class: 'xray-pill xray-pill-cta' }, 'Sin costo →')
             )
           )
         )
@@ -998,8 +1003,8 @@
           el('a', { class: 'cta-btn', href: CAL_URL, target: '_blank', rel: 'noopener' }, 'Agenda una llamada', el('span', { class: 'arrow' }, Icon('arrow-ur', 20))),
           el('a', { class: 'cta-btn cta-btn-audit', href: XRAY_URL, target: '_blank', rel: 'noopener' },
             el('span', { class: 'cta-btn-audit-dot', 'aria-hidden': 'true' }),
-            'Auditar mi dominio',
-            el('span', { class: 'cta-btn-audit-free' }, 'gratis')
+            'Reporte de mi outreach',
+            el('span', { class: 'cta-btn-audit-free' }, 'sin costo')
           )
         ),
         el('div', { class: 'cta-meta' },
