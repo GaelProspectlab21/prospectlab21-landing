@@ -245,9 +245,9 @@
       'Operamos como un robot que no duerme: 24/7 segmentando cuentas hasta el último filtro, afinando secuencias y manteniendo la bandeja limpia. Tú recibes reuniones calificadas en el calendario, no clicks.');
     const ctas = el('div', { class: 'hero-ctas intro-fade', style: { transitionDelay: '1280ms' } },
       el('a', { href: CAL_URL, target: '_blank', rel: 'noopener', class: 'btn btn-primary' }, 'Agenda una llamada', Icon('arrow-right', 16)),
-      el('a', { href: XRAY_URL, target: '_blank', rel: 'noopener', class: 'btn btn-audit' },
+      el('a', { href: XRAY_URL, target: '_blank', rel: 'noopener', class: 'btn btn-audit', title: 'Xray: reporte de salud de tu cold email — score, problemas y plan 90d.' },
         el('span', { class: 'btn-audit-dot', 'aria-hidden': 'true' }),
-        'Hacer mi Xray',
+        'Reporte Xray de mi cold email',
         el('span', { class: 'btn-audit-free' }, 'gratis')
       )
     );
@@ -491,14 +491,18 @@
     };
 
     // Trigger cinematic the moment the section is even barely visible —
-    // we use rootMargin so it starts BEFORE the user reaches it, that way
-    // when the phone is on screen the email is already opening or open.
-    // Total cinematic length cut from 5.3s to ~1.6s so a normal scroll never outruns it.
+    // rootMargin -10% so it starts as section is just appearing.
+    // Tuned phases so EACH stage is perceivable (esp. the highlight of our email):
+    //   0-600ms       inbox falls into place
+    //   600-1500ms    our email gets highlighted (900ms — long enough to be readable)
+    //   1500-2100ms   zoom into the email
+    //   2100ms+       email open, bullet 01 pinned for 800ms
+    // Total ~2.9s — still scroll-friendly but the selection moment is actually visible.
     let started = false;
-    const T_FALL = 350;   // inbox falls into place
-    const T_HL   = 700;   // our email gets highlighted
-    const T_OPEN = 1050;  // zoom into the email
-    const T_LOCK = 800;   // ms to keep bullet 01 pinned after open
+    const T_FALL = 600;
+    const T_HL   = 1500;
+    const T_OPEN = 2100;
+    const T_LOCK = 800;
     const cinematicIo = new IntersectionObserver((entries) => {
       entries.forEach(e => {
         if (!e.isIntersecting || started) return;
@@ -731,12 +735,12 @@
           el('div', { class: 'xray-copy' },
             el('div', { class: 'xray-eyebrow' },
               el('span', { class: 'xray-eyebrow-dot' }),
-              'Xray · gratis · 30 segundos'
+              'Reporte Xray · gratis · 30 segundos'
             ),
             el('h2', { class: 'xray-title' },
-              'Antes de mandar un solo correo — ¿tu setup está listo? El ',
+              'El ',
               el('span', { class: 'xray-title-accent' }, 'Xray'),
-              ' te lo dice gratis.'
+              ' es un reporte gratis sobre la salud de tu cold email.'
             ),
             el('p', { class: 'xray-lead' },
               'El Xray es un escaneo de 30 segundos a tu setup de cold email: revisa si tus dominios aguantan volumen, si tus correos van a llegar a inbox o spam, y cómo te ves frente a tu ICP. Te devuelve un score, los problemas que tienes y un plan a 90 días para arreglarlos. Sin costo, sin registro.'
@@ -752,10 +756,10 @@
             ),
             el('div', { class: 'xray-ctas' },
               el('a', { class: 'xray-btn xray-btn-primary', href: XRAY_URL, target: '_blank', rel: 'noopener' },
-                'Hacer mi Xray gratis',
+                'Quiero mi reporte Xray gratis',
                 Icon('arrow-ur', 16)
               ),
-              el('span', { class: 'xray-domain-hint' }, 'audit.prospectlab21.com · sin tarjeta')
+              el('span', { class: 'xray-domain-hint' }, 'audit.prospectlab21.com · sin tarjeta · sin registro')
             )
           ),
           el('div', { class: 'xray-card' },
@@ -982,7 +986,7 @@
           el('a', { class: 'cta-btn', href: CAL_URL, target: '_blank', rel: 'noopener' }, 'Agenda una llamada', el('span', { class: 'arrow' }, Icon('arrow-ur', 20))),
           el('a', { class: 'cta-btn cta-btn-audit', href: XRAY_URL, target: '_blank', rel: 'noopener' },
             el('span', { class: 'cta-btn-audit-dot', 'aria-hidden': 'true' }),
-            'Hacer mi Xray',
+            'Reporte Xray de mi cold email',
             el('span', { class: 'cta-btn-audit-free' }, 'gratis')
           )
         ),
