@@ -4,7 +4,7 @@
   'use strict';
 
   const CAL_URL = 'https://cal.com/gael-prospectlab21/15min';
-  const XRAY_URL = 'https://audit.prospectlab21.com';
+  const XRAY_URL = 'https://xray.prospectlab21.com';
 
   const $ = (sel, root = document) => root.querySelector(sel);
   const $$ = (sel, root = document) => Array.from(root.querySelectorAll(sel));
@@ -245,9 +245,9 @@
       'Operamos como un robot que no duerme: 24/7 segmentando cuentas hasta el último filtro, afinando secuencias y manteniendo la bandeja limpia. Tú recibes reuniones calificadas en el calendario, no clicks.');
     const ctas = el('div', { class: 'hero-ctas intro-fade', style: { transitionDelay: '1280ms' } },
       el('a', { href: CAL_URL, target: '_blank', rel: 'noopener', class: 'btn btn-primary' }, 'Agenda una llamada', Icon('arrow-right', 16)),
-      el('a', { href: XRAY_URL, target: '_blank', rel: 'noopener', class: 'btn btn-audit', title: 'Xray: reporte de salud de tu cold email — score, problemas y plan 90d.' },
+      el('a', { href: XRAY_URL, target: '_blank', rel: 'noopener', class: 'btn btn-audit', title: 'Xray: reporte de salud de tu outreach — score, problemas y plan 90d.' },
         el('span', { class: 'btn-audit-dot', 'aria-hidden': 'true' }),
-        'Reporte Xray de mi cold email',
+        'Reporte Xray de mi outreach',
         el('span', { class: 'btn-audit-free' }, 'gratis')
       )
     );
@@ -687,12 +687,12 @@
   }
 
   /* ---------------- XRAY — MICRO-SAAS LEAD MAGNET ----------------
-     Free DNS audit at audit.prospectlab21.com. Acts as a low-friction
+     Free outreach health report at xray.prospectlab21.com. Acts as a low-friction
      entry point for cold visitors that aren't ready to book a call yet. */
   function XraySection() {
     // 4 cosas concretas que el reporte le devuelve al lead — sin jerga, "qué obtengo"
     const checks = [
-      { k: 'Score 0–100',     d: 'Un número claro de qué tan listo está tu setup para mandar cold email hoy.' },
+      { k: 'Score 0–100',     d: 'Un número claro de qué tan listo está tu setup para hacer outreach hoy.' },
       { k: 'Lo que está mal', d: 'Lista de los problemas reales (con su impacto) — sin tecnicismos innecesarios.' },
       { k: 'Cómo te ves',     d: 'Qué tan creíble eres para tu ICP cuando aterriza en tu firma, web o LinkedIn.' },
       { k: 'Plan 90 días',    d: 'Qué arreglar esta semana, este mes y este trimestre. En orden de prioridad.' }
@@ -740,10 +740,10 @@
             el('h2', { class: 'xray-title' },
               'El ',
               el('span', { class: 'xray-title-accent' }, 'Xray'),
-              ' es un reporte gratis sobre la salud de tu cold email.'
+              ' es un reporte gratis sobre la salud de tu outreach.'
             ),
             el('p', { class: 'xray-lead' },
-              'El Xray es un escaneo de 30 segundos a tu setup de cold email: revisa si tus dominios aguantan volumen, si tus correos van a llegar a inbox o spam, y cómo te ves frente a tu ICP. Te devuelve un score, los problemas que tienes y un plan a 90 días para arreglarlos. Sin costo, sin registro.'
+              'El Xray es un escaneo de 30 segundos a tu setup de outreach: revisa si tus dominios aguantan volumen, si tus correos van a llegar a inbox o spam, y cómo te ves frente a tu ICP. Te devuelve un score, los problemas que tienes y un plan a 90 días para arreglarlos. Sin costo, sin registro.'
             ),
             el('ol', { class: 'xray-steps', role: 'list' },
               ...steps.map(s => el('li', { class: 'xray-step' },
@@ -759,7 +759,7 @@
                 'Quiero mi reporte Xray gratis',
                 Icon('arrow-ur', 16)
               ),
-              el('span', { class: 'xray-domain-hint' }, 'audit.prospectlab21.com · sin tarjeta · sin registro')
+              el('span', { class: 'xray-domain-hint' }, 'xray.prospectlab21.com · sin tarjeta · sin registro')
             )
           ),
           el('div', { class: 'xray-card' },
@@ -771,7 +771,7 @@
               el('div', { class: 'xray-window-dots', 'aria-hidden': 'true' },
                 el('span'), el('span'), el('span')
               ),
-              el('span', { class: 'xray-card-url' }, 'audit.prospectlab21.com / tuempresa.com')
+              el('span', { class: 'xray-card-url' }, 'xray.prospectlab21.com / tuempresa.com')
             ),
             el('div', { class: 'xray-card-body' },
               score,
@@ -986,7 +986,7 @@
           el('a', { class: 'cta-btn', href: CAL_URL, target: '_blank', rel: 'noopener' }, 'Agenda una llamada', el('span', { class: 'arrow' }, Icon('arrow-ur', 20))),
           el('a', { class: 'cta-btn cta-btn-audit', href: XRAY_URL, target: '_blank', rel: 'noopener' },
             el('span', { class: 'cta-btn-audit-dot', 'aria-hidden': 'true' }),
-            'Reporte Xray de mi cold email',
+            'Reporte Xray de mi outreach',
             el('span', { class: 'cta-btn-audit-free' }, 'gratis')
           )
         ),
