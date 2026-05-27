@@ -247,8 +247,8 @@
       el('a', { href: CAL_URL, target: '_blank', rel: 'noopener', class: 'btn btn-primary' }, 'Agenda una llamada', Icon('arrow-right', 16)),
       el('a', { href: XRAY_URL, target: '_blank', rel: 'noopener', class: 'btn btn-audit' },
         el('span', { class: 'btn-audit-dot', 'aria-hidden': 'true' }),
-        'Reporte de mi outreach',
-        el('span', { class: 'btn-audit-free' }, 'sin costo')
+        'Hacer mi Xray',
+        el('span', { class: 'btn-audit-free' }, 'gratis')
       )
     );
 
@@ -721,19 +721,19 @@
           el('div', { class: 'xray-copy' },
             el('div', { class: 'xray-eyebrow' },
               el('span', { class: 'xray-eyebrow-dot' }),
-              '100% sin costo · sin tarjeta · sin registro'
+              'Xray · 100% sin costo · sin tarjeta'
             ),
             el('h2', { class: 'xray-title' },
-              'Reporte completo de tu ',
-              el('span', { class: 'xray-title-accent' }, 'cold outreach'),
-              '. Gratis.'
+              'El ',
+              el('span', { class: 'xray-title-accent' }, 'Xray'),
+              ': rayos X completo de tu outreach. Gratis.'
             ),
             el('p', { class: 'xray-lead' },
-              'No es solo un check de DNS. Es un rayos X completo de tu outreach: infraestructura, deliverability, cómo te ves frente a tu ICP y un plan a 90 días para que cada envío valga la pena. Sin costo, sin registro, en 30 segundos.'
+              'El Xray no es solo un check de DNS. Es un escaneo completo de tu cold outreach: infraestructura, deliverability, cómo te ves frente a tu ICP y un plan a 90 días para que cada envío valga la pena. Sin costo, sin registro, en 30 segundos.'
             ),
             el('div', { class: 'xray-ctas' },
               el('a', { class: 'xray-btn xray-btn-primary', href: XRAY_URL, target: '_blank', rel: 'noopener' },
-                'Quiero mi reporte gratis',
+                'Hacer mi Xray gratis',
                 Icon('arrow-ur', 16)
               ),
               el('span', { class: 'xray-domain-hint' }, 'audit.prospectlab21.com')
@@ -761,7 +761,7 @@
               list
             ),
             el('div', { class: 'xray-card-foot' },
-              el('span', { class: 'xray-pill' }, 'Reporte completo'),
+              el('span', { class: 'xray-pill' }, 'Xray completo'),
               el('span', { class: 'xray-pill xray-pill-cta' }, 'Sin costo →')
             )
           )
@@ -1003,8 +1003,8 @@
           el('a', { class: 'cta-btn', href: CAL_URL, target: '_blank', rel: 'noopener' }, 'Agenda una llamada', el('span', { class: 'arrow' }, Icon('arrow-ur', 20))),
           el('a', { class: 'cta-btn cta-btn-audit', href: XRAY_URL, target: '_blank', rel: 'noopener' },
             el('span', { class: 'cta-btn-audit-dot', 'aria-hidden': 'true' }),
-            'Reporte de mi outreach',
-            el('span', { class: 'cta-btn-audit-free' }, 'sin costo')
+            'Hacer mi Xray',
+            el('span', { class: 'cta-btn-audit-free' }, 'gratis')
           )
         ),
         el('div', { class: 'cta-meta' },
