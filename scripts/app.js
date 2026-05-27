@@ -302,7 +302,7 @@
     { from: 'Stripe',             subject: 'Your invoice for May 2026',             preview: 'Thanks for your business. Amount due: €0.00',          avatar: '#635bff' },
     { from: 'Bro from Bali',      subject: 'quick question 👀',                     preview: 'Hey man, hope you’re crushing it! Quick favor…',   avatar: '#f4b942' }
   ];
-  const OUR_MAIL = { from: 'Gael — ProspectLab21', subject: 'su ronda de junio', preview: 'Marcos, cerraron la Serie A y abren CDMX este trimestre. Tremendo año…', avatar: '#4B0082' };
+  const OUR_MAIL = { from: 'Gael — ProspectLab21', subject: 'felicidades por la serie a', preview: 'Qué tal Marcos, vi que cerraron la Serie A y van a abrir CDMX…', avatar: '#0047FF' };
   const INBOX_ORDER = (() => {
     const list = SPAM_INBOX.map(r => ({ ...r, kind: 'spam' }));
     list.splice(2, 0, { ...OUR_MAIL, kind: 'ours' });
@@ -379,14 +379,14 @@
 
     const mkHL = (id, text) => el('span', { class: 'mail-hl', dataset: { hl: id } }, text);
 
-    const subjectEl = el('div', { class: 'mail-subject', dataset: { anchor: 'asunto' } }, mkHL('asunto', 'su ronda de junio'));
+    const subjectEl = el('div', { class: 'mail-subject', dataset: { anchor: 'asunto' } }, mkHL('asunto', 'felicidades por la serie a'));
     const txt = el('div', { class: 'mail-text' },
-      el('p', { dataset: { anchor: 'apertura' } }, mkHL('apertura', 'Marcos,')),
-      el('p', { dataset: { anchor: 'gancho' } }, mkHL('gancho', 'cerraron la Serie A y abren CDMX este trimestre.'), ' Tremendo año.'),
-      el('p', { dataset: { anchor: 'pain' } }, 'Justo después de una ronda, la prospección manual se cae sola. ', mkHL('pain', 'Neta'), ', hemos visto founders perder 3 meses post-ronda por no prender el outbound a tiempo. Lo nuestro: reuniones con decisores sin que tu equipo toque un mail.'),
-      el('p', { dataset: { anchor: 'cta' } }, mkHL('cta', '¿Te aviento una auditoría gratis del outbound de Trackr?'), ' Sin venta — te digo dónde se les están escapando reuniones.'),
-      el('p', { dataset: { anchor: 'firma' } }, mkHL('firma', 'Gael')),
-      el('p', { class: 'mail-pd', dataset: { anchor: 'pd' } }, mkHL('pd', 'PD: vi que andan buscando 2 SDRs en Monterrey. Justo lo que les ahorramos.'))
+      el('p', { dataset: { anchor: 'apertura' } }, mkHL('apertura', 'Qué tal Marcos,')),
+      el('p', { dataset: { anchor: 'gancho' } }, mkHL('gancho', 'Vi que cerraron la Serie A y van a abrir CDMX este trimestre'), ' — se nota que en Trackr se tomaron en serio el siguiente capítulo.'),
+      el('p', { dataset: { anchor: 'pain' } }, mkHL('pain', 'Justo después de una ronda, prospectar manual se cae sola'), ' — coordinar SDRs nuevos, vacantes abiertas y pipeline al mismo tiempo es complicado.'),
+      el('p', { dataset: { anchor: 'cta' } }, mkHL('cta', '¿Te aviento un video corto con cómo apoyamos a founders post-ronda a llenar su calendario con decisores reales?')),
+      el('p', { dataset: { anchor: 'firma' } }, mkHL('firma', 'Un abrazo,')),
+      el('p', { class: 'mail-pd', dataset: { anchor: 'pd' } }, mkHL('pd', 'PD: vi que andan buscando 2 SDRs en Monterrey — justo lo que les ahorramos los primeros 90 días.'))
     );
     mailInner.appendChild(subjectEl);
     mailInner.appendChild(txt);
@@ -423,10 +423,10 @@
 
     const setPhase = (p) => {
       phone.className = 'phone phase-' + p;
-      // arm rows on falling
+      // arm rows on falling (fast stagger so the inbox-fill completes before highlight)
       if (p === 'falling') {
         const rows = $$('.inbox-row', inboxList);
-        rows.forEach((r, i) => setTimeout(() => r.classList.add('is-armed'), i * 90));
+        rows.forEach((r, i) => setTimeout(() => r.classList.add('is-armed'), i * 30));
       }
       // visibility
       const inboxVisible = p === 'falling' || p === 'highlight' || p === 'opening';
@@ -490,32 +490,34 @@
       stepEls.forEach(n => n.classList.toggle('active', n.dataset.stepid === id));
     };
 
-    // Trigger cinematic once when section enters viewport
+    // Trigger cinematic the moment the section is even barely visible —
+    // we use rootMargin so it starts BEFORE the user reaches it, that way
+    // when the phone is on screen the email is already opening or open.
+    // Total cinematic length cut from 5.3s to ~1.6s so a normal scroll never outruns it.
     let started = false;
+    const T_FALL = 350;   // inbox falls into place
+    const T_HL   = 700;   // our email gets highlighted
+    const T_OPEN = 1050;  // zoom into the email
+    const T_LOCK = 800;   // ms to keep bullet 01 pinned after open
     const cinematicIo = new IntersectionObserver((entries) => {
       entries.forEach(e => {
         if (!e.isIntersecting || started) return;
         started = true;
         phase = 'falling';  mock.setPhase('falling');
-        setTimeout(() => { phase = 'highlight'; mock.setPhase('highlight'); }, 1200);
-        setTimeout(() => { phase = 'opening';   mock.setPhase('opening');   }, 2100);
+        setTimeout(() => { phase = 'highlight'; mock.setPhase('highlight'); }, T_FALL);
+        setTimeout(() => { phase = 'opening';   mock.setPhase('opening');   }, T_HL);
         setTimeout(() => {
           phase = 'open';
           mock.setPhase('open');
-          // PIN bullet 01 for ~2.6s so the user reads from the start
           lockActiveObs = true;
           forceActive('asunto');
           if (stepEls[0]) stepEls[0].classList.add('is-in');
           revealSeen();
-          // Gently bring bullet 01 into the reading band
-          if (stepEls[0]) {
-            try { stepEls[0].scrollIntoView({ behavior: 'smooth', block: 'center' }); } catch (_) {}
-          }
-          setTimeout(() => { lockActiveObs = false; }, 2600);
-        }, 2700);
+          setTimeout(() => { lockActiveObs = false; }, T_LOCK);
+        }, T_OPEN);
         cinematicIo.disconnect();
       });
-    }, { threshold: 0.28 });
+    }, { threshold: 0, rootMargin: '0px 0px -10% 0px' });
     cinematicIo.observe(section);
 
     // Reveal observer — flips .is-in as soon as the bullet enters the viewport.
@@ -684,11 +686,19 @@
      Free DNS audit at audit.prospectlab21.com. Acts as a low-friction
      entry point for cold visitors that aren't ready to book a call yet. */
   function XraySection() {
+    // 4 cosas concretas que el reporte le devuelve al lead — sin jerga, "qué obtengo"
     const checks = [
-      { k: 'Infraestructura', d: 'SPF, DKIM, DMARC y MX revisados en vivo. Te decimos exactamente qué arreglar.' },
-      { k: 'Deliverability',  d: 'Si tu dominio aguanta volumen real o se te va a quemar al tercer envío.' },
-      { k: 'Posicionamiento',  d: 'Cómo te ves frente a tu ICP — qué dice tu web, tu LinkedIn y tu firma.' },
-      { k: 'Plan 90 días',    d: 'Roadmap concreto: qué arreglar esta semana, este mes y este trimestre.' }
+      { k: 'Score 0–100',     d: 'Un número claro de qué tan listo está tu setup para mandar cold email hoy.' },
+      { k: 'Lo que está mal', d: 'Lista de los problemas reales (con su impacto) — sin tecnicismos innecesarios.' },
+      { k: 'Cómo te ves',     d: 'Qué tan creíble eres para tu ICP cuando aterriza en tu firma, web o LinkedIn.' },
+      { k: 'Plan 90 días',    d: 'Qué arreglar esta semana, este mes y este trimestre. En orden de prioridad.' }
+    ];
+
+    // 3 pasos para que entiendan el flujo en 5 segundos
+    const steps = [
+      { n: '1', t: 'Pegas tu dominio',  d: 'Sin registro, sin tarjeta. Solo tudominio.com.' },
+      { n: '2', t: 'Escaneamos en vivo', d: 'En 30 segundos analizamos infraestructura, deliverability y posicionamiento.' },
+      { n: '3', t: 'Te damos el reporte', d: 'Score, problemas y plan de acción — PDF descargable si lo quieres pasar a tu equipo.' }
     ];
 
     const score = el('div', { class: 'xray-score', 'aria-hidden': 'true' },
@@ -721,28 +731,31 @@
           el('div', { class: 'xray-copy' },
             el('div', { class: 'xray-eyebrow' },
               el('span', { class: 'xray-eyebrow-dot' }),
-              'Xray · 100% sin costo · sin tarjeta'
+              'Xray · gratis · 30 segundos'
             ),
             el('h2', { class: 'xray-title' },
-              'El ',
+              'Antes de mandar un solo correo — ¿tu setup está listo? El ',
               el('span', { class: 'xray-title-accent' }, 'Xray'),
-              ': rayos X completo de tu outreach. Gratis.'
+              ' te lo dice gratis.'
             ),
             el('p', { class: 'xray-lead' },
-              'El Xray no es solo un check de DNS. Es un escaneo completo de tu cold outreach: infraestructura, deliverability, cómo te ves frente a tu ICP y un plan a 90 días para que cada envío valga la pena. Sin costo, sin registro, en 30 segundos.'
+              'El Xray es un escaneo de 30 segundos a tu setup de cold email: revisa si tus dominios aguantan volumen, si tus correos van a llegar a inbox o spam, y cómo te ves frente a tu ICP. Te devuelve un score, los problemas que tienes y un plan a 90 días para arreglarlos. Sin costo, sin registro.'
+            ),
+            el('ol', { class: 'xray-steps', role: 'list' },
+              ...steps.map(s => el('li', { class: 'xray-step' },
+                el('span', { class: 'xs-num' }, s.n),
+                el('div', {},
+                  el('span', { class: 'xs-t' }, s.t),
+                  el('span', { class: 'xs-d' }, s.d)
+                )
+              ))
             ),
             el('div', { class: 'xray-ctas' },
               el('a', { class: 'xray-btn xray-btn-primary', href: XRAY_URL, target: '_blank', rel: 'noopener' },
                 'Hacer mi Xray gratis',
                 Icon('arrow-ur', 16)
               ),
-              el('span', { class: 'xray-domain-hint' }, 'audit.prospectlab21.com')
-            ),
-            el('div', { class: 'xray-bullets' },
-              el('span', { class: 'xray-bullet' }, '· $0 — siempre'),
-              el('span', { class: 'xray-bullet' }, '· Score 0–100 al instante'),
-              el('span', { class: 'xray-bullet' }, '· Plan 90 días a tu medida'),
-              el('span', { class: 'xray-bullet' }, '· PDF descargable')
+              el('span', { class: 'xray-domain-hint' }, 'audit.prospectlab21.com · sin tarjeta')
             )
           ),
           el('div', { class: 'xray-card' },
@@ -875,52 +888,18 @@
             el('div', { class: 'sobre-portrait-tag' },
               el('div', { class: 'signature' }, 'Gael'),
               'FUNDADOR / CEO · 13'
-            ),
-            el('div', { class: 'sobre-portrait-badge', 'aria-hidden': 'true' },
-              el('span', { class: 'spb-dot' }),
-              'EN OPERACIÓN'
             )
-          ),
-          el('dl', { class: 'sobre-credentials' },
-            el('div', { class: 'sc-row' }, el('dt', {}, 'Nombre'),   el('dd', {}, 'Gael Sosa')),
-            el('div', { class: 'sc-row' }, el('dt', {}, 'Rol'),      el('dd', {}, 'Fundador & CEO')),
-            el('div', { class: 'sc-row' }, el('dt', {}, 'Edad'),     el('dd', {}, '13 años')),
-            el('div', { class: 'sc-row' }, el('dt', {}, 'Base'),     el('dd', {}, 'Zapopan, MX')),
-            el('div', { class: 'sc-row' }, el('dt', {}, 'Opera en'), el('dd', {}, 'ES · MX · LATAM')),
-            el('div', { class: 'sc-row' }, el('dt', {}, 'Enfoque'),  el('dd', {}, 'Cold email B2B'))
           )
         ),
         el('div', { class: 'sobre-content' },
           el('h3', { class: 'sobre-greeting' }, 'Hey, soy ', el('span', { class: 'sobre-name' }, 'Gael'), '.'),
           el('div', { class: 'sobre-bio' },
-            el('p', { class: 'sobre-lead' },
-              'Tengo 13 años y opero una agencia de cold email B2B real, con clientes reales, desde Zapopan. La edad no la uso como gimmick — la uso como ventaja: ',
-              el('em', {}, 'velocidad de ejecución'), ' que casi nadie en este mercado tiene.'
-            ),
+            el('p', { class: 'sobre-lead' }, 'Soy un emprendedor joven obsesionado con una cosa: conectar negocios con los decisores que ', el('em', {}, 'realmente'), ' mueven el juego — a través de cold email ejecutado con precisión.'),
             el('blockquote', { class: 'sobre-credo' },
               el('p', {}, 'No creo en la suerte.'),
               el('p', {}, 'Creo en sistemas bien construidos y ejecución constante.')
             ),
-            el('p', { class: 'sobre-discipline' },
-              'Mantengo el pipeline técnico yo mismo: Apify, Smartlead, Python, deliverability. Cada lead enriquecido, cada secuencia escrita, cada bandeja monitoreada — lo veo con mis ojos antes de que lo veas tú.'
-            )
-          ),
-          el('div', { class: 'sobre-pillars', 'aria-label': 'Filosofía operativa' },
-            el('div', { class: 'sp-card' },
-              el('span', { class: 'sp-num' }, '01'),
-              el('h5', {}, 'Ejecución'),
-              el('p', {}, 'Las ideas valen cero. El volumen y la velocidad resuelven el 90% de los problemas.')
-            ),
-            el('div', { class: 'sp-card' },
-              el('span', { class: 'sp-num' }, '02'),
-              el('h5', {}, 'Control'),
-              el('p', {}, 'Energía solo a lo que controlo: mis decisiones, mi sistema, mi ejecución. El resto es ruido.')
-            ),
-            el('div', { class: 'sp-card' },
-              el('span', { class: 'sp-num' }, '03'),
-              el('h5', {}, 'Nadie viene'),
-              el('p', {}, 'Nadie va a venir a salvarte. Por eso construyo sistemas que funcionen aunque yo no esté pegado al teclado.')
-            )
+            el('p', { class: 'sobre-discipline' }, 'Trabajo con disciplina, enfoque y mentalidad de largo plazo.')
           ),
           el('p', { class: 'sobre-punch' }, 'No prometo magia.'),
           el('div', { class: 'sobre-principles', 'aria-label': 'Principios' },
