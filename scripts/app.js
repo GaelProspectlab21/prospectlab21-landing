@@ -65,7 +65,7 @@
   function Nav() {
     const header = el('header', { class: 'nav dark', id: 'site-nav' },
       el('a', { class: 'nav-brand', href: '#top', 'aria-label': 'ProspectLab21 — Inicio' },
-        el('img', { src: 'assets/logo-mark.png', alt: '', width: 26, height: 26, loading: 'eager', decoding: 'sync', fetchpriority: 'high' }),
+        el('img', { src: 'assets/logo-mark.png', alt: '', 'aria-hidden': 'true', width: 26, height: 26, loading: 'eager', decoding: 'sync', fetchpriority: 'high' }),
         el('span', {}, 'PROSPECTLAB 21')
       ),
       el('nav', { class: 'nav-links', 'aria-label': 'Navegación principal' },
@@ -257,7 +257,7 @@
     section.appendChild(grid);
 
     section.appendChild(el('div', { class: 'hero-meta' },
-      el('span', { class: 'live' }, 'EN OPERACIÓN · Q2 / 2026'),
+      el('span', { class: 'live' }, 'EN OPERACIÓN · 2026'),
       el('span', {}, '21 / GAEL · CEO 13 AÑOS')
     ));
     // Minimalist scroll indicator: tiny mouse outline w/ dot
@@ -1008,7 +1008,7 @@
     return el('footer', { class: 'footer' },
       el('div', { class: 'footer-inner' },
         el('div', { class: 'footer-brand' },
-          el('img', { src: 'assets/logo-mark.png', alt: '', width: 28, height: 28, loading: 'lazy' }),
+          el('img', { src: 'assets/logo-mark.png', alt: '', 'aria-hidden': 'true', width: 28, height: 28, loading: 'lazy' }),
           el('span', {}, 'PROSPECTLAB 21')
         ),
         el('div', { class: 'footer-links' },
