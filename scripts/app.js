@@ -3,7 +3,7 @@
 (() => {
   'use strict';
 
-  const CAL_URL = 'https://cal.com/gael-prospectlab21/15min';
+  const CAL_URL = 'https://call.prospectlab21.com';
   const XRAY_URL = 'https://xray.prospectlab21.com';
 
   const $ = (sel, root = document) => root.querySelector(sel);
@@ -242,7 +242,7 @@
     h1.appendChild(dotWrap);
 
     const sub = el('p', { class: 'hero-sub intro-fade', style: { transitionDelay: '1100ms' } },
-      'Operamos como un robot que no duerme: 24/7 segmentando cuentas hasta el último filtro, afinando secuencias y manteniendo la bandeja limpia. Tú recibes reuniones calificadas en el calendario, no clicks.');
+      'Un sistema que trabaja por ti 24/7: segmenta, escribe con criterio y cuida la entrega. Tú solo entras a cerrar — que es lo que ya haces bien. Reuniones en tu calendario, no clicks.');
     const ctas = el('div', { class: 'hero-ctas intro-fade', style: { transitionDelay: '1280ms' } },
       el('a', { href: CAL_URL, target: '_blank', rel: 'noopener', class: 'btn btn-primary' }, 'Agenda una llamada', Icon('arrow-right', 16)),
       el('a', { href: XRAY_URL, target: '_blank', rel: 'noopener', class: 'btn btn-audit', title: 'Xray: reporte de salud de tu outreach — score, problemas y plan 90d.' },
@@ -258,7 +258,7 @@
 
     section.appendChild(el('div', { class: 'hero-meta' },
       el('span', { class: 'live' }, 'EN OPERACIÓN · 2026'),
-      el('span', {}, '21 / GAEL · CEO 13 AÑOS')
+      el('span', {}, 'POR GAEL SOSA · FUNDADOR')
     ));
     // Minimalist scroll indicator: tiny mouse outline w/ dot
     section.appendChild(el('a', { class: 'hero-scroll', href: '#mails', 'aria-label': 'Desplazarse a la siguiente sección' },
@@ -367,7 +367,7 @@
       el('div', { class: 'mail-avatar' }, 'G'),
       el('div', { class: 'mail-meta' },
         el('div', { class: 'mm-row' },
-          el('span', { class: 'name' }, 'Gael Carrasco'),
+          el('span', { class: 'name' }, 'Gael Sosa'),
           el('span', { class: 'time' }, '9:38')
         ),
         el('div', { class: 'mm-row mm-row-sub' },
@@ -804,7 +804,7 @@
       { num: '02', label: 'Enriquecimiento', desc: 'Cada lead se pule con la información que importa: qué hacen, qué venden, qué cambió.', glyph: '<svg viewBox="0 0 48 48"><rect x="8" y="10" width="32" height="8" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.5"/><rect x="8" y="20" width="32" height="8" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.5"/><rect x="8" y="30" width="32" height="8" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.5"/><circle cx="13" cy="14" r="1.4" fill="currentColor"/><circle cx="13" cy="24" r="1.4" fill="currentColor"/><circle cx="13" cy="34" r="1.4" fill="currentColor"/><line x1="18" y1="14" x2="36" y2="14" stroke="currentColor" stroke-width="1.2" opacity="0.5"/><line x1="18" y1="24" x2="32" y2="24" stroke="currentColor" stroke-width="1.2" opacity="0.5"/><line x1="18" y1="34" x2="34" y2="34" stroke="currentColor" stroke-width="1.2" opacity="0.5"/></svg>' },
       { num: '03', label: 'Calificador',     desc: 'Descartamos cuentas que no encajan antes de gastar tinta. Filtro duro.',                glyph: '<svg viewBox="0 0 48 48"><path d="M8 10 L40 10 L29 25 L29 38 L19 33 L19 25 Z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><line x1="13" y1="15" x2="35" y2="15" stroke="currentColor" stroke-width="1.2" opacity="0.45"/></svg>' },
       { num: '04', label: 'Escritor',        desc: 'Construimos las secuencias con el ángulo correcto para ese nicho específico.',          glyph: '<svg viewBox="0 0 48 48"><line x1="10" y1="36" x2="36" y2="36" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><line x1="10" y1="30" x2="28" y2="30" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" opacity="0.6"/><path d="M30 8 L40 18 L20 38 L10 38 L10 28 Z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><line x1="28" y1="13" x2="35" y2="20" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>' },
-      { num: '05', label: 'Sender',          desc: 'Mailboxes dedicadas, warm-up de 30 días, deliverability monitoreada todos los días.',  glyph: '<svg viewBox="0 0 48 48"><path d="M6 24 L42 8 L34 40 L24 28 L6 24 Z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><line x1="24" y1="28" x2="42" y2="8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>' },
+      { num: '05', label: 'Sender',          desc: 'Mailboxes dedicadas, warm-up de 21 días, deliverability monitoreada todos los días.',  glyph: '<svg viewBox="0 0 48 48"><path d="M6 24 L42 8 L34 40 L24 28 L6 24 Z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><line x1="24" y1="28" x2="42" y2="8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>' },
       { num: '06', label: 'Calendar',        desc: 'Reuniones calificadas con decisores. En tu calendario, no en una hoja de cálculo.',     glyph: '<svg viewBox="0 0 48 48"><rect x="8" y="12" width="32" height="28" rx="2" fill="none" stroke="currentColor" stroke-width="1.5"/><line x1="8" y1="20" x2="40" y2="20" stroke="currentColor" stroke-width="1.5"/><line x1="16" y1="8" x2="16" y2="14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><line x1="32" y1="8" x2="32" y2="14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><polyline points="18,29 22,33 30,25" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>' }
     ];
 
@@ -872,6 +872,133 @@
     return section;
   }
 
+  /* ---------------- SIMULADOR DE ENTREGABILIDAD ----------------
+     Interactive proof of the "Sender" node: play with volume / warm-up /
+     dedicated-domain and watch 100 emails land in inbox vs spam in real time.
+     Directly answers the #1 objection: "¿me van a quemar el dominio?". */
+  function Simulador() {
+    const TOTAL = 100;
+    let volume = 25, warmup = 21, dedicated = true;
+
+    const matrix = el('div', { class: 'sim-matrix', 'aria-hidden': 'true' });
+    const dots = [];
+    for (let i = 0; i < TOTAL; i++) { const d = el('span', { class: 'sim-dot' }); dots.push(d); matrix.appendChild(d); }
+
+    const pctNum = el('span', { class: 'sim-pct-num' }, '95');
+    const verdict = el('div', { class: 'sim-verdict good' }, 'Inbox. Tu dominio intacto.');
+    const inboxCount = el('span', { class: 'sim-leg-num' }, '95');
+    const spamCount = el('span', { class: 'sim-leg-num' }, '5');
+    const warnNote = el('div', { class: 'sim-warn', style: { display: 'none' } });
+
+    const compute = () => {
+      let rate = 0.55 + 0.40 * Math.min(1, warmup / 21);
+      rate -= Math.max(0, (volume - 30)) / 100;
+      if (!dedicated) rate -= 0.35;
+      return Math.max(0.04, Math.min(0.985, rate));
+    };
+
+    const screen = el('div', { class: 'sim-screen', dataset: { tone: 'good' } });
+
+    const render = () => {
+      const rate = compute();
+      const inbox = Math.round(rate * TOTAL);
+      dots.forEach((d, i) => {
+        const isInbox = i < inbox;
+        d.classList.toggle('is-inbox', isInbox);
+        d.classList.toggle('is-spam', !isInbox);
+        d.style.setProperty('--dd', (i * 5) + 'ms');
+      });
+      pctNum.textContent = Math.round(rate * 100);
+      inboxCount.textContent = inbox;
+      spamCount.textContent = TOTAL - inbox;
+      let v, cls;
+      if (rate >= 0.9) { v = 'Inbox. Tu dominio intacto.'; cls = 'good'; }
+      else if (rate >= 0.7) { v = 'Pasable — pero dejas reuniones cayendo en spam.'; cls = 'warn'; }
+      else { v = 'Te estás quemando. Esto es justo lo que NO hacemos.'; cls = 'bad'; }
+      verdict.textContent = v;
+      verdict.className = 'sim-verdict ' + cls;
+      screen.dataset.tone = cls;
+      warnNote.textContent = dedicated ? '' : 'Estás usando tu dominio principal. Un mal envío aquí y quemas tu correo corporativo de por vida.';
+      warnNote.style.display = dedicated ? 'none' : 'flex';
+    };
+
+    const slider = (labelText, min, max, val, unit, onInput) => {
+      const valEl = el('span', { class: 'sim-ctrl-val' }, val + unit);
+      const range = el('input', { type: 'range', min, max, value: val, class: 'sim-range', 'aria-label': labelText });
+      range.addEventListener('input', () => { const n = +range.value; valEl.textContent = n + unit; onInput(n); render(); });
+      return { wrap: el('div', { class: 'sim-ctrl' },
+        el('div', { class: 'sim-ctrl-top' }, el('span', { class: 'sim-ctrl-label' }, labelText), valEl),
+        range
+      ), range };
+    };
+
+    const volCtrl = slider('Volumen diario por buzón', 5, 80, volume, '/día', (n) => { volume = n; });
+    const warmCtrl = slider('Warm-up del dominio', 0, 28, warmup, ' días', (n) => { warmup = n; });
+
+    const dedToggle = el('button', { class: 'sim-toggle is-on', type: 'button', 'aria-pressed': 'true' },
+      el('span', { class: 'sim-toggle-track' }, el('span', { class: 'sim-toggle-knob' })),
+      el('span', { class: 'sim-toggle-label' }, 'Dominio dedicado (no el principal)')
+    );
+    dedToggle.addEventListener('click', () => {
+      dedicated = !dedicated;
+      dedToggle.classList.toggle('is-on', dedicated);
+      dedToggle.setAttribute('aria-pressed', String(dedicated));
+      render();
+    });
+
+    const presetBtn = el('button', { class: 'sim-preset', type: 'button' },
+      Icon('arrow-right', 14), 'Aplicar el ajuste de ProspectLab21'
+    );
+    presetBtn.addEventListener('click', () => {
+      volume = 25; warmup = 21; dedicated = true;
+      volCtrl.range.value = 25; volCtrl.range.dispatchEvent(new Event('input'));
+      warmCtrl.range.value = 21; warmCtrl.range.dispatchEvent(new Event('input'));
+      dedToggle.classList.add('is-on'); dedToggle.setAttribute('aria-pressed', 'true');
+      render();
+      screen.classList.remove('sim-flash'); void screen.offsetWidth; screen.classList.add('sim-flash');
+    });
+
+    const controls = el('div', { class: 'sim-controls' },
+      volCtrl.wrap,
+      warmCtrl.wrap,
+      el('div', { class: 'sim-ctrl' },
+        el('div', { class: 'sim-ctrl-top' }, el('span', { class: 'sim-ctrl-label' }, 'Infraestructura')),
+        dedToggle
+      ),
+      warnNote,
+      presetBtn
+    );
+
+    screen.appendChild(el('div', { class: 'sim-screen-head' },
+      el('span', { class: 'sim-leg sim-leg-inbox' }, el('span', { class: 'sim-leg-dot' }), 'Inbox ', inboxCount),
+      el('span', { class: 'sim-leg sim-leg-spam' }, el('span', { class: 'sim-leg-dot' }), 'Spam ', spamCount)
+    ));
+    screen.appendChild(matrix);
+    screen.appendChild(el('div', { class: 'sim-screen-foot' },
+      el('div', { class: 'sim-pct' }, pctNum, el('span', { class: 'sim-pct-unit' }, '% a inbox')),
+      verdict
+    ));
+
+    const section = el('section', { class: 'sim-section', id: 'simulador' },
+      el('div', { class: 'sim-bg', 'aria-hidden': 'true' }),
+      el('div', { class: 'section-inner sim-inner' },
+        el('div', { class: 'section-eyebrow sim-eyebrow' }, 'La prueba'),
+        el('h2', { class: 'sim-title' }, '¿Te van a ', el('span', { class: 'sim-title-accent' }, 'quemar el dominio?')),
+        el('p', { class: 'lead sim-lead' }, 'Juega con los controles. Mira en vivo a dónde caen tus 100 correos — y por qué mandar mucho, rápido y desde tu dominio principal es la receta del desastre.'),
+        el('div', { class: 'sim-grid' }, controls, screen)
+      )
+    );
+
+    render();
+
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) { section.classList.add('is-in'); io.disconnect(); } });
+    }, { threshold: 0.2 });
+    io.observe(section);
+
+    return section;
+  }
+
   /* ---------------- SOBRE MI ---------------- */
   function SobreMi() {
     return el('section', { class: 'sobre-section', id: 'sobre' },
@@ -917,7 +1044,6 @@
       el('figure', { class: 'sobre-scripture' },
         el('div', { class: 'ss-bar', 'aria-hidden': 'true' }),
         el('div', { class: 'ss-body' },
-          el('div', { class: 'ss-eyebrow' }, el('span', { class: 'ss-dot', 'aria-hidden': 'true' }), 'Versículo guía'),
           el('blockquote', { class: 'ss-quote' },
             el('span', { class: 'ss-open', 'aria-hidden': 'true' }, '“'),
             'Ninguno tenga en poco tu juventud, sino sé ejemplo de los creyentes en ',
@@ -935,14 +1061,14 @@
 
   /* ---------------- FAQ ---------------- */
   const FAQ_ITEMS = [
-    { q: '¿Qué hacen exactamente?', a: 'Operamos tu cold email B2B de punta a punta: segmentamos hasta el último filtro, armamos las secuencias con personalización por lead, manejamos toda la infraestructura de envío y dejamos las reuniones calificadas en tu calendario. Tu equipo no toca un correo.' },
-    { q: '¿Me van a quemar el dominio?', a: 'No, ese es justo el punto. Usamos dominios y mailboxes dedicadas que nunca tocan tu dominio principal. Cada cuenta lleva entre 21 y 30 días de warm-up antes de mandar un solo correo a un lead. Bounce siempre debajo del 3%, ritmo conservador y deliverability monitoreada todos los días.' },
-    { q: '¿En cuánto tiempo empiezan a caer reuniones?', a: 'Depende del nicho y de qué tan fino esté el ICP, pero el rango normal son las primeras 2 a 3 semanas. El mes 1 es setup y primera oleada. El mes 2 y 3 es donde el sistema empieza a generar reuniones de forma constante.' },
-    { q: '¿Qué necesitan de mí?', a: 'Una llamada de diagnóstico de 20 minutos, acceso para crear los dominios y correos auxiliares, y que me cuentes a fondo tu ICP y tu oferta. No te pedimos listas, ni plantillas, ni que tú escribas los correos. Eso lo hacemos nosotros.' },
-    { q: '¿Les funciona cualquier sector?', a: 'No, y mejor así. Filtro fuerte: B2B con ticket medio arriba de unos 3,000 USD/mes o con ciclo de venta consultivo. Si tu producto encaja, te lo digo. Si no encaja, también te lo digo — y si conozco a alguien que sí lo trabaja, te lo paso.' },
-    { q: '¿Cuánto cuesta?', a: 'Lo platicamos en la llamada — el precio depende del volumen de mailboxes, los países que ataques y tu ciclo de venta. Sin contratos largos: si a los 60 días no hay tracción real, nos salimos sin drama.' },
-    { q: '¿Y si ya tengo SDR interno?', a: 'Mejor todavía. Nosotros llenamos su calendario, él cierra. Un SDR caro se quema haciendo prospección manual; con el sistema de fondo, pasa el día en llamadas en lugar de en hojas de cálculo.' },
-    { q: '¿Mandan reportes?', a: 'Sí. Dashboard semanal con envíos, aperturas, replies clasificados (interesado, tibio, no interesado, fuera de oficina, rebote) y reuniones agendadas. Cada quince días tenemos una llamada para ajustar mensaje, ICP y volumen.' }
+    { q: '¿Qué hacen exactamente?', a: 'Operamos tu cold email B2B de punta a punta. Definimos a quién atacar —cargo, sector, tamaño de empresa y país—, construimos la lista con filtros reales en vez de comprar bases sucias, y escribimos secuencias personalizadas por nicho, no plantillas. Montamos la infraestructura de envío con dominios y buzones dedicados, lanzamos las campañas, hacemos pruebas A/B de asunto y ángulo, y clasificamos cada respuesta que llega. Lo único que aterriza en tu bandeja son conversaciones con gente que decide la compra. Tú entras a cerrar; nosotros mantenemos la máquina girando y reportando. Tu equipo no escribe un solo correo ni toca una hoja de cálculo.' },
+    { q: '¿Me van a quemar el dominio?', a: 'No, y el sistema está diseñado justo para que eso nunca pase. Nunca usamos tu dominio principal: montamos dominios y buzones dedicados solo para las campañas, separados de tu correo corporativo. Cada cuenta lleva 21 días de warm-up progresivo antes de mandar un correo a un lead real, y el volumen se escala poco a poco conforme madura la reputación de envío. Mantenemos el bounce por debajo del 2%, el ritmo conservador y revisamos la entregabilidad todos los días. Si una cuenta empieza a flaquear, la sacamos antes de que arrastre a las demás. Tu dominio de siempre queda intacto.' },
+    { q: '¿En cuánto tiempo empiezan a caer reuniones?', a: 'El rango normal son las primeras 2 a 3 semanas, aunque depende del nicho y de qué tan afilado esté tu cliente ideal. El mes 1 es setup y la primera oleada a volumen bajo, mientras los dominios terminan de calentarse. El mes 2 y 3 es donde el sistema entra en régimen: las campañas ya están afinadas con datos reales y las reuniones empiezan a caer de forma constante. No te voy a prometer veinte reuniones la primera semana —quien te promete eso, miente—. Te prometo un sistema que, una vez calibrado, produce conversaciones de negocio mes tras mes.' },
+    { q: '¿Qué necesitan de mí?', a: 'Poco, y casi todo en una sola llamada de diagnóstico de 20 minutos. Necesito que me cuentes a fondo tu cliente ideal y tu oferta —qué vendes, a quién y por qué te eligen— y acceso para crear los dominios y correos auxiliares. Validamos juntos el mensaje y el ángulo antes de lanzar nada, así que tienes la última palabra sobre cómo suena tu marca. No te pido listas de contactos, ni plantillas, ni que tú escribas los correos: de todo eso me encargo yo. A partir del lanzamiento, tu única tarea es presentarte a las reuniones que se agenden.' },
+    { q: '¿Les funciona cualquier sector?', a: 'No, y prefiero decírtelo de frente antes de cobrarte. El filtro es claro: B2B que le vende a otras empresas, con ticket medio por arriba de unos 3,000 USD/mes o un ciclo de venta consultivo. Agencias, software, reclutamiento, consultoras y servicios profesionales encajan muy bien porque ahí una sola reunión puede valer miles. Si tu producto es de ticket bajo, masivo o B2C, el cold email no es tu mejor canal y te lo digo en la llamada en lugar de venderte algo que no te va a funcionar. Y si conozco a alguien que sí trabaja tu caso, te lo paso.' },
+    { q: '¿Cuánto cuesta?', a: 'La inversión arranca en 600 € al mes, más una cuota de setup única que cubre toda la infraestructura —dominios, buzones y los 21 días de warm-up—. El número final depende del volumen de buzones, de cuántos países ataques y de tu ciclo de venta, así que te lo cierro concreto en la llamada. No bajo el precio para cerrar, pero tampoco te amarro con contratos largos: si a los 60 días no hay tracción real, nos salimos sin drama. La forma sana de verlo: con que cierres un cliente, el servicio normalmente ya se pagó solo.' },
+    { q: '¿Y si ya tengo SDR interno?', a: 'Mejor todavía, porque se suman. Un SDR caro se quema haciendo la parte mecánica: armar listas, buscar correos, mandar secuencias y perseguir follow-ups. Eso es justo lo que el sistema hace en automático y a escala. Nosotros le llenamos el calendario de reuniones calificadas y él se dedica a lo único que de verdad mueve la aguja: hablar con prospectos y cerrar. No reemplazo a tu equipo comercial, lo alimento para que pase el día vendiendo en vez de en hojas de cálculo. Si todavía no tienes SDR, el sistema te da el flujo de reuniones sin que tengas que contratar uno aún.' },
+    { q: '¿Mandan reportes?', a: 'Sí, y suele ser la parte que más se agradece. Tienes un dashboard con los números que de verdad importan —correos enviados, aperturas, respuestas y reuniones agendadas— y cada respuesta llega ya clasificada: interesado, tibio, no interesado, fuera de oficina o rebote, para que priorices a quién contestar primero. Cada quince días tenemos una llamada para revisar qué está funcionando y ajustar mensaje, ICP y volumen según lo que dicen los datos. Iteramos con números, no con corazonadas. En ningún momento te quedas adivinando si el sistema está dando resultados ni en qué se está yendo tu inversión.' }
   ];
 
   function FAQ() {
@@ -1080,7 +1206,7 @@
       return 'unknown';
     };
     document.addEventListener('click', (e) => {
-      const a = e.target.closest && e.target.closest('a[href*="cal.com/gael-prospectlab21"]');
+      const a = e.target.closest && e.target.closest('a[href*="call.prospectlab21.com"]');
       if (a) track('cta_click', { location: locFor(a) });
       const m = e.target.closest && e.target.closest('a[href^="mailto:gael@prospectlab21.com"]');
       if (m) track('email_click', { location: m.closest('.footer-links') ? 'footer' : 'cta-alt' });
@@ -1110,6 +1236,44 @@
     $$('section[id], section[class*="-section"]').forEach(s => sIo.observe(s));
   }
 
+  /* ---------------- TESTIMONIOS (prueba social — listo para tus videos) ----------------
+     Rellena TESTIMONIOS con los videos de tus clientes y la sección aparece sola.
+     Formato por item:
+       { name, role, company, video, quote }
+       - video: URL de embed (YouTube/Loom) para <iframe>, o un .mp4 directo.
+       - quote: frase corta opcional que se muestra debajo del video.
+     Mientras el array esté vacío, la sección NO se renderiza (cero hueco en la web). */
+  const TESTIMONIOS = [
+    // { name: 'Nombre del cliente', role: 'Director Comercial', company: 'Empresa S.A.', video: 'https://www.youtube.com/embed/VIDEO_ID', quote: 'En 6 semanas llenamos la agenda de reuniones.' },
+  ];
+
+  function Testimonios() {
+    if (!TESTIMONIOS.length) return null;
+    const isMp4 = (u) => /\.mp4($|\?)/i.test(u || '');
+    const grid = el('div', { class: 'testi-grid' });
+    TESTIMONIOS.forEach((t) => {
+      const media = isMp4(t.video)
+        ? el('video', { class: 'testi-video', src: t.video, controls: true, preload: 'metadata', playsinline: true })
+        : el('iframe', { class: 'testi-video', src: t.video, title: 'Testimonio de ' + (t.name || 'cliente'), loading: 'lazy', allow: 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture', allowfullscreen: true, frameborder: '0' });
+      grid.appendChild(el('article', { class: 'testi-card' },
+        el('div', { class: 'testi-video-wrap' }, media),
+        t.quote ? el('blockquote', { class: 'testi-quote' }, '“' + t.quote + '”') : null,
+        el('div', { class: 'testi-person' },
+          el('span', { class: 'testi-name' }, t.name || ''),
+          el('span', { class: 'testi-role' }, [t.role, t.company].filter(Boolean).join(' · '))
+        )
+      ));
+    });
+    return el('section', { class: 'testi-section', id: 'testimonios' },
+      el('div', { class: 'section-inner' },
+        el('div', { class: 'section-eyebrow' }, 'Lo que dicen mis clientes'),
+        el('h2', {}, 'No tienes que creerme ', el('em', { style: { fontStyle: 'normal', color: 'var(--accent)' } }, 'a mí'), '.'),
+        el('p', { class: 'lead' }, 'Clientes reales contando, en su propia voz, cómo les cambió el pipeline.'),
+        grid
+      )
+    );
+  }
+
   /* ---------------- BOOT ---------------- */
   function boot() {
     const root = $('#root');
@@ -1124,7 +1288,10 @@
     root.appendChild(PorqueNuncaMuere());
     root.appendChild(XraySection());
     root.appendChild(Maquinaria());
+    root.appendChild(Simulador());
     root.appendChild(SobreMi());
+    const testi = Testimonios();
+    if (testi) root.appendChild(testi);
     root.appendChild(FAQ());
     root.appendChild(CTA());
     root.appendChild(Footer());

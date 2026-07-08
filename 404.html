@@ -80,6 +80,30 @@
     background: #5c85ff; border-radius: 50%;
   }
 </style>
+<!-- Vercel Web Analytics -->
+<script defer src="/_vercel/insights/script.js"></script>
+<!-- Pixel propio → Google Sheet, tab "Trafico Web" -->
+<script>
+  (function () {
+    try {
+      var k = 'pl21_vid';
+      var vid = localStorage.getItem(k);
+      if (!vid) { vid = Date.now().toString(36) + Math.random().toString(36).slice(2, 8); localStorage.setItem(k, vid); }
+      var payload = JSON.stringify({
+        app: 'landing-404',
+        path: location.pathname + location.search,
+        referrer: document.referrer || '',
+        ua: navigator.userAgent || '',
+        visitor_id: vid
+      });
+      if (navigator.sendBeacon) {
+        navigator.sendBeacon('/api/hit', new Blob([payload], { type: 'application/json' }));
+      } else {
+        fetch('/api/hit', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: payload, keepalive: true });
+      }
+    } catch (e) {}
+  })();
+</script>
 </head>
 <body>
 <div class="bg" aria-hidden="true"></div>
