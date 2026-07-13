@@ -3,12 +3,39 @@
 // straight to the Google Sheet, tab "Trafico Web". Fire-and-forget; the client
 // never waits. Vercel Web Analytics runs in parallel for aggregated metrics.
 
+// Rate-limit por IP (Upstash Redis vía REST). Va INLINE a propósito: este proyecto
+// (build/) no tiene package.json, así que no hay "type": "module" declarado y un
+// import entre módulos sería una apuesta. Sin imports nuevos = cero riesgo de romper
+// el deploy estático. Fail-open: sin las env vars, no limita y todo sigue igual.
+async function limited(req, res, { bucket, limit, windowSec }) {
+  const url = process.env.UPSTASH_REDIS_REST_URL;
+  const token = process.env.UPSTASH_REDIS_REST_TOKEN;
+  if (!url || !token) return false;
+  const ip = (req.headers['x-forwarded-for'] || '').split(',')[0].trim() || 'unknown';
+  try {
+    const r = await fetch(`${url}/pipeline`, {
+      method: 'POST',
+      headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' },
+      body: JSON.stringify([['INCR', `rl:${bucket}:${ip}`], ['EXPIRE', `rl:${bucket}:${ip}`, String(windowSec), 'NX']]),
+      signal: AbortSignal.timeout(1500),
+    });
+    if (!r.ok) return false;
+    const out = await r.json();
+    if (Number(out?.[0]?.result ?? 0) > limit) {
+      res.status(429).json({ ok: false, error: 'rate_limited' });
+      return true;
+    }
+  } catch { /* store caído: fail-open */ }
+  return false;
+}
+
 export default async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
   if (req.method === 'OPTIONS') return res.status(204).end();
   if (req.method !== 'POST') return res.status(405).json({ ok: false });
+  if (await limited(req, res, { bucket: 'hit', limit: 40, windowSec: 60 })) return;
 
   let body = req.body;
   if (typeof body === 'string') { try { body = JSON.parse(body); } catch { body = {}; } }
