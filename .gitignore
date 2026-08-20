@@ -35,3 +35,12 @@ _smoketest.py
 _screenshot.py
 
 .vercel
+
+# Secretos: este repo es PUBLICO. El .gitignore anterior no cubria .env.
+.env
+.env.*
+!.env.example
+*.key
+*.pem
+credentials/
+google_token.json
