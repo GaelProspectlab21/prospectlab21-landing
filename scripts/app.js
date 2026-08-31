@@ -84,7 +84,9 @@
   }
 
   /* ---------------- HERO ---------------- */
-  const ROTATOR_WORDS = ['agencias', 'consultoras', 'reclutadoras', 'constructoras', 'despachos', 'empresas'];
+  // TODAS tienen que ser femeninas en plural: el titular dice "Cuento todas LAS ...".
+  // Habia un 'despachos' aqui y una de cada seis vueltas salia "todas las despachos".
+  const ROTATOR_WORDS = ['agencias', 'consultoras', 'reclutadoras', 'constructoras', 'asesorías', 'empresas'];
 
   function Rotator(onChange) {
     const measure = el('span', { class: 'rotator-measure', 'aria-hidden': 'true' });
