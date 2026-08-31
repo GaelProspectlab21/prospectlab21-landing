@@ -116,7 +116,9 @@ section { position: relative; }
 .hero h1 {
   font-family: var(--font-display);
   font-weight: 700;
-  font-size: clamp(48px, 6.4vw, 96px);
+  /* Bajado de 96px a 76px el 30-ago: el titular nuevo son 3 lineas y a 96px
+     empujaba los CTA fuera de la pantalla en portatiles de 1366x768. */
+  font-size: clamp(40px, 5.2vw, 76px);
   line-height: 1.0;
   letter-spacing: -0.028em;
   color: #fff;
@@ -140,6 +142,7 @@ section { position: relative; }
   white-space: nowrap;
   pointer-events: none;
 }
+.hero h1 .rotator-measure::after { content: attr(data-w); }
 .hero h1 .rotator-track {
   display: inline-block;
   position: absolute;
@@ -3214,3 +3217,244 @@ html.has-pl-cursor [contenteditable="true"] { cursor: text !important; }
 
 @media (max-width: 900px) { .sim-section { padding: 90px 24px; } }
 @media (prefers-reduced-motion: reduce) { .sim-dot, .sim-screen, .sim-grid { transition: none !important; } .sim-screen.sim-flash { animation: none; } }
+
+/* ═══════════════════════════════════════════════════════════════════
+   AÑADIDOS 2026-08-30 — nota bajo los CTA, FAQ reestructurado,
+   sección de precio y bloque de texto para buscadores (ya no oculto).
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* ---- Hero: la razón para dar clic, justo debajo de los botones ---- */
+.hero-cta-note {
+  margin: 20px 0 0;
+  max-width: 460px;
+  font-family: var(--font-body);
+  font-size: 14.5px;
+  line-height: 1.55;
+  color: rgba(255,255,255,0.5);
+  border-left: 2px solid rgba(92,133,255,0.55);
+  padding-left: 14px;
+}
+
+/* ---- FAQ: veredicto de una línea + párrafos, sin guiones de por medio ---- */
+.faq-answer-inner {
+  padding: 0 56px 28px 4px;
+  max-width: 74ch;
+}
+.faq-a-short {
+  margin: 0 0 18px !important;
+  padding: 0 0 0 16px !important;
+  border-left: 3px solid var(--accent);
+  font-family: var(--font-display);
+  font-size: 17.5px !important;
+  font-weight: 600;
+  line-height: 1.4 !important;
+  color: var(--pl-ink) !important;
+  letter-spacing: -0.01em;
+}
+.faq-a-p {
+  margin: 0 0 16px !important;
+  padding-right: 0 !important;
+  font-size: 16.5px;
+  line-height: 1.68;
+  color: var(--fg-secondary);
+}
+.faq-a-p:last-child { margin-bottom: 0 !important; }
+
+/* ---- Precio ---- */
+.precio-section {
+  background: var(--pl-black);
+  color: #fff;
+  padding: 140px 48px;
+}
+.precio-section .section-eyebrow { color: rgba(255,255,255,0.5); }
+.precio-section h2 {
+  /* tokens.css trae h2 { color: var(--fg) } como selector de elemento, asi que
+     cualquier seccion oscura tiene que pisar el color a mano. No es opcional. */
+  color: #fff;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(36px, 5vw, 68px);
+  line-height: 1.05;
+  letter-spacing: -0.025em;
+  margin: 0 0 24px;
+  max-width: 900px;
+  text-wrap: balance;
+}
+.precio-section h2 em { color: var(--pl-blue-300) !important; }
+.precio-section .lead {
+  font-size: 18px;
+  line-height: 1.6;
+  color: rgba(255,255,255,0.62);
+  max-width: 660px;
+  margin: 0 0 56px;
+}
+
+.precio-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+  max-width: 860px;
+}
+.precio-card {
+  border: 1px solid rgba(255,255,255,0.14);
+  background: linear-gradient(180deg, rgba(0,71,255,0.10), rgba(255,255,255,0.012));
+  padding: 32px 28px 28px;
+  border-radius: 2px;
+  transition: border-color 260ms var(--ease-standard), transform 260ms var(--ease-standard);
+}
+.precio-card:hover {
+  border-color: rgba(92,133,255,0.55);
+  transform: translateY(-3px);
+}
+.precio-mercado {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--pl-blue-300);
+  margin-bottom: 18px;
+}
+.precio-cifra { display: flex; align-items: baseline; gap: 10px; }
+.precio-cifra .pc-num {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(40px, 5.4vw, 60px);
+  line-height: 1;
+  letter-spacing: -0.03em;
+  color: #fff;
+}
+.precio-cifra .pc-per {
+  font-size: 14px;
+  color: rgba(255,255,255,0.5);
+}
+.precio-setup {
+  margin-top: 14px;
+  font-size: 14.5px;
+  color: rgba(255,255,255,0.72);
+}
+.precio-nota-card {
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px solid rgba(255,255,255,0.10);
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  letter-spacing: 0.06em;
+  color: rgba(255,255,255,0.42);
+}
+
+.precio-sub {
+  font-family: var(--font-display);
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.55);
+  margin: 64px 0 24px;
+}
+.precio-incluye {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  max-width: 860px;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px 40px;
+}
+.precio-incluye li {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  font-size: 15.5px;
+  line-height: 1.55;
+  color: rgba(255,255,255,0.74);
+}
+.pi-tick {
+  flex-shrink: 0;
+  width: 16px; height: 16px;
+  margin-top: 4px;
+  border-radius: 50%;
+  border: 1px solid rgba(92,133,255,0.6);
+  position: relative;
+}
+.pi-tick::after {
+  content: "";
+  position: absolute;
+  left: 4px; top: 3px;
+  width: 4px; height: 7px;
+  border-right: 1.5px solid var(--pl-blue-300);
+  border-bottom: 1.5px solid var(--pl-blue-300);
+  transform: rotate(42deg);
+}
+
+.precio-honesto {
+  margin: 48px 0 0;
+  max-width: 660px;
+  font-size: 16px;
+  line-height: 1.65;
+  color: rgba(255,255,255,0.6);
+  border-left: 2px solid rgba(255,255,255,0.18);
+  padding-left: 18px;
+}
+.precio-cta {
+  margin-top: 44px;
+  display: flex;
+  align-items: center;
+  gap: 22px;
+  flex-wrap: wrap;
+}
+.precio-cta-note {
+  font-size: 14px;
+  color: rgba(255,255,255,0.45);
+  max-width: 340px;
+  line-height: 1.5;
+}
+
+/* ---- Bloque de texto para buscadores: visible, no escondido ---- */
+#seo-content {
+  background: var(--pl-paper);
+  color: var(--fg);
+  border-top: 1px solid var(--border);
+  max-width: none;
+  margin: 0;
+  padding: 96px 48px;
+}
+#seo-content > * { max-width: 760px; margin-left: auto; margin-right: auto; }
+#seo-content h2 {
+  font-family: var(--font-display);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--fg-secondary);
+  margin: 0 0 20px;
+}
+#seo-content p {
+  font-size: 15.5px;
+  line-height: 1.75;
+  color: var(--fg-secondary);
+  margin: 0 0 18px;
+}
+#seo-content a { color: var(--accent); }
+#seo-content .seo-mercados {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  color: var(--fg-tertiary);
+  border-top: 1px solid var(--border);
+  padding-top: 18px;
+  margin-top: 28px;
+}
+
+@media (max-width: 860px) {
+  .precio-grid,
+  .precio-incluye { grid-template-columns: minmax(0, 1fr); }
+}
+@media (max-width: 720px) {
+  .precio-section { padding: 80px 24px; }
+  .precio-section .lead { margin-bottom: 40px; }
+  .faq-answer-inner { padding: 0 0 24px 4px; }
+  .faq-a-short { font-size: 16.5px !important; }
+  .faq-a-p { font-size: 15.5px; }
+  .hero-cta-note { font-size: 14px; }
+  #seo-content { padding: 64px 24px; }
+}

@@ -64,18 +64,18 @@
   /* ---------------- NAV ---------------- */
   function Nav() {
     const header = el('header', { class: 'nav dark', id: 'site-nav' },
-      el('a', { class: 'nav-brand', href: '#top', 'aria-label': 'ProspectLab21 — Inicio' },
+      el('a', { class: 'nav-brand', href: '#top', 'aria-label': 'ProspectLab21, inicio' },
         el('img', { src: 'assets/logo-mark.png', alt: '', 'aria-hidden': 'true', width: 26, height: 26, loading: 'eager', decoding: 'sync', fetchpriority: 'high' }),
         el('span', {}, 'PROSPECTLAB 21')
       ),
       el('nav', { class: 'nav-links', 'aria-label': 'Navegación principal' },
-        el('a', { href: '#mails' }, 'Cómo funciona'),
+        el('a', { href: '#mails' }, 'El correo'),
         el('a', { href: '#proceso' }, 'Proceso'),
         el('a', { href: '#maquinaria' }, 'La maquinaria'),
-        el('a', { href: '#sobre' }, 'Sobre Gael'),
-        el('a', { href: '#faq' }, 'FAQ')
+        el('a', { href: '#precio' }, 'Precio'),
+        el('a', { href: '#faq' }, 'Preguntas')
       ),
-      el('a', { class: 'nav-cta', href: CAL_URL, target: '_blank', rel: 'noopener' }, 'Agenda una llamada', Icon('arrow-right', 14))
+      el('a', { class: 'nav-cta', href: CAL_URL, target: '_blank', rel: 'noopener' }, 'Agenda 20 min', Icon('arrow-right', 14))
     );
     const onScroll = () => header.classList.toggle('scrolled', window.scrollY > 32);
     addEventListener('scroll', onScroll, { passive: true });
@@ -84,7 +84,7 @@
   }
 
   /* ---------------- HERO ---------------- */
-  const ROTATOR_WORDS = ['ese cliente', 'un sí', 'ese deal', 'el cierre', 'ese deal', 'un sí', 'tu próximo cliente'];
+  const ROTATOR_WORDS = ['agencias', 'consultoras', 'reclutadoras', 'constructoras', 'despachos', 'empresas'];
 
   function Rotator(onChange) {
     const measure = el('span', { class: 'rotator-measure', 'aria-hidden': 'true' });
@@ -93,7 +93,9 @@
     let i = 0;
     const render = () => {
       const word = ROTATOR_WORDS[i];
-      measure.textContent = word;
+      // El medidor lleva la palabra en un atributo, no como texto: asi el H1 no
+      // aparece con la palabra duplicada para buscadores y lectores de pantalla.
+      measure.setAttribute('data-w', word);
       track.textContent = word;
       requestAnimationFrame(() => {
         wrap.style.width = measure.getBoundingClientRect().width + 'px';
@@ -221,38 +223,40 @@
     const section = el('section', { class: 'hero', id: 'top' });
     section.appendChild(Spotlight());
 
-    const eyebrow = el('div', { class: 'hero-eyebrow intro-fade', style: { transitionDelay: '60ms' } }, 'Agencia de cold email B2B');
+    const eyebrow = el('div', { class: 'hero-eyebrow intro-fade', style: { transitionDelay: '60ms' } }, 'Agencia de cold email B2B · España y LATAM');
     const h1 = el('h1', { class: 'headline-intro' });
-    // Line 1
-    h1.appendChild(IntroLine('A un mail de', 180, 80));
+    h1.appendChild(IntroLine('Cuento todas las', 180, 80));
     h1.appendChild(el('br'));
-    h1.appendChild(IntroLine('conectar con', 520, 80));
-    h1.appendChild(el('span', { class: 'iw-space' }, ' '));
-    const rotatorWrap = el('span', { class: 'iw-wrap rotator-wrap', style: { transitionDelay: '780ms' } });
+    const rotatorWrap = el('span', { class: 'iw-wrap rotator-wrap', style: { transitionDelay: '520ms' } });
     rotatorWrap.appendChild(Rotator((word) => {
-      if (word === 'tu próximo cliente') {
+      if (word === 'empresas') {
         h1.classList.add('is-settling');
         setTimeout(() => h1.classList.remove('is-settling'), 900);
       }
     }));
     h1.appendChild(rotatorWrap);
+    h1.appendChild(el('br'));
+    h1.appendChild(IntroLine('de tu mercado', 700, 70));
     const dotWrap = el('span', { class: 'iw-wrap' });
-    const dot = el('span', { class: 'iw', style: { transitionDelay: '880ms' } }, '.');
+    const dot = el('span', { class: 'iw', style: { transitionDelay: '1000ms' } }, '.');
     dotWrap.appendChild(dot);
     h1.appendChild(dotWrap);
 
     const sub = el('p', { class: 'hero-sub intro-fade', style: { transitionDelay: '1100ms' } },
-      'Un sistema que trabaja por ti 24/7: segmenta, escribe con criterio y cuida la entrega. Tú solo entras a cerrar — que es lo que ya haces bien. Reuniones en tu calendario, no clicks.');
+      'Y después les escribo. Una por una, con un correo hecho a mano y un dato real de su negocio. Sin listas compradas, sin plantillas. Tú solo entras a las reuniones que se agenden.');
     const ctas = el('div', { class: 'hero-ctas intro-fade', style: { transitionDelay: '1280ms' } },
-      el('a', { href: CAL_URL, target: '_blank', rel: 'noopener', class: 'btn btn-primary' }, 'Agenda una llamada', Icon('arrow-right', 16)),
-      el('a', { href: XRAY_URL, target: '_blank', rel: 'noopener', class: 'btn btn-audit', title: 'Xray: reporte de salud de tu outreach — score, problemas y plan 90d.' },
+      el('a', { href: CAL_URL, target: '_blank', rel: 'noopener', class: 'btn btn-primary' }, 'Agenda 20 minutos', Icon('arrow-right', 16)),
+      el('a', { href: XRAY_URL, target: '_blank', rel: 'noopener', class: 'btn btn-audit', title: 'Xray: informe de salud de tu prospección. Nota, problemas y plan a 90 días.' },
         el('span', { class: 'btn-audit-dot', 'aria-hidden': 'true' }),
-        'Reporte Xray de mi outreach',
+        'Xray gratis de mi prospección',
         el('span', { class: 'btn-audit-free' }, 'gratis')
       )
     );
 
-    const copy = el('div', { class: 'hero-copy' }, eyebrow, h1, sub, ctas);
+    const ctaNote = el('p', { class: 'hero-cta-note intro-fade', style: { transitionDelay: '1420ms' } },
+      'En esa llamada te digo cuántas empresas hay de verdad en tu nicho, con nombres. Te lo llevas aunque no contrates.');
+
+    const copy = el('div', { class: 'hero-copy' }, eyebrow, h1, sub, ctas, ctaNote);
     const grid = el('div', { class: 'hero-grid' }, copy, SplineRobot());
     section.appendChild(grid);
 
@@ -273,6 +277,7 @@
       eyebrow.classList.add('is-in');
       sub.classList.add('is-in');
       ctas.classList.add('is-in');
+      ctaNote.classList.add('is-in');
       rotatorWrap.classList.add('is-in');
       $$('.iw', h1).forEach(n => n.classList.add('is-in'));
     }));
@@ -282,13 +287,13 @@
 
   /* ---------------- MAILS SECTION ---------------- */
   const MAIL_STEPS = [
-    { id: 'asunto',   num: '01 / ASUNTO',    title: 'Hiperconcreto, en minúsculas.',           body: 'Suena a mensaje interno, no a marketing. Eso solo ya dobla la tasa de apertura.' },
-    { id: 'apertura', num: '02 / APERTURA',  title: 'Sin "Hola". Solo el nombre.',             body: 'Rompemos el patrón del 95% de cold emails que arrancan igual. El cerebro del lead detecta la diferencia en 0,3 segundos.' },
-    { id: 'gancho',   num: '03 / GANCHO',    title: 'Dato verificable, no halago.',            body: 'Serie A + Lisboa demuestra research real. Imposible de copiar/pegar a otro lead — y eso es exactamente la señal.' },
-    { id: 'pain',     num: '04 / PAIN',      title: 'El momento humano.',                      body: 'Aquí el email deja de sonar a empresa. Atreverse a sonar humano es lo que destaca entre 50 correos corporativos del día.' },
-    { id: 'cta',      num: '05 / CTA',       title: 'Valor antes de pedir.',                   body: 'No pide reunión. Ofrece una auditoría real que el lead querría aunque no comprara. Cuesta más decir no a algo gratis y útil.' },
-    { id: 'firma',    num: '06 / FIRMA',     title: 'Una sola palabra.',                       body: 'Solo el nombre. Mensaje entre personas, no entre empresas.' },
-    { id: 'pd',       num: '07 / PD',        title: 'El cierre que casi nadie usa.',           body: '"2 SDRs en Madrid" cierra el loop: gasto real → ahorro real. La PD es el lugar más leído del email.' }
+    { id: 'asunto',   num: '01 / ASUNTO',    title: 'Concreto y en minúsculas.',               body: 'Suena a mensaje interno, no a campaña. Es lo único que el decisor lee antes de decidir si te abre o te archiva.' },
+    { id: 'apertura', num: '02 / APERTURA',  title: 'Sin "Hola". Solo el nombre.',             body: 'Casi todos los correos en frío arrancan igual, así que arrancar distinto ya te separa del montón antes de la primera coma.' },
+    { id: 'gancho',   num: '03 / GANCHO',    title: 'Un dato suyo, no un halago.',             body: 'La ronda que cerraron y la ciudad que van a abrir. Ese dato no se puede pegar en otro correo, y esa es justo la señal que buscamos.' },
+    { id: 'pain',     num: '04 / PAIN',      title: 'El momento humano.',                      body: 'Aquí el correo deja de sonar a empresa. Sonar a persona es lo que destaca entre los cincuenta mensajes corporativos del día.' },
+    { id: 'cta',      num: '05 / CTA',       title: 'Dar antes de pedir.',                     body: 'No pide reunión. Ofrece algo que el decisor querría aunque nunca comprara. Cuesta mucho más decir que no a eso.' },
+    { id: 'firma',    num: '06 / FIRMA',     title: 'Una sola palabra.',                       body: 'Solo el nombre. Es un mensaje entre dos personas, no entre dos empresas.' },
+    { id: 'pd',       num: '07 / PD',        title: 'El cierre que casi nadie usa.',           body: 'Las dos vacantes de SDR que tienen abiertas cierran el círculo: gasto real hoy, ahorro real mañana. La posdata es la línea más leída del correo.' }
   ];
   const SPAM_INBOX = [
     { from: 'Newsletter Weekly',  subject: 'Edición #432: 17 cosas que…',           preview: 'Hola {first_name}, esta semana descubrirás…',           avatar: '#9aa3b2' },
@@ -302,7 +307,7 @@
     { from: 'Stripe',             subject: 'Your invoice for May 2026',             preview: 'Thanks for your business. Amount due: €0.00',          avatar: '#635bff' },
     { from: 'Bro from Bali',      subject: 'quick question 👀',                     preview: 'Hey man, hope you’re crushing it! Quick favor…',   avatar: '#f4b942' }
   ];
-  const OUR_MAIL = { from: 'Gael — ProspectLab21', subject: 'felicidades por la serie a', preview: 'Qué tal Marcos, vi que cerraron la Serie A y van a abrir CDMX…', avatar: '#0047FF' };
+  const OUR_MAIL = { from: 'Gael · ProspectLab21', subject: 'felicidades por la serie a', preview: 'Qué tal Marcos, vi que cerraron la Serie A y van a abrir CDMX este trimestre', avatar: '#0047FF' };
   const INBOX_ORDER = (() => {
     const list = SPAM_INBOX.map(r => ({ ...r, kind: 'spam' }));
     list.splice(2, 0, { ...OUR_MAIL, kind: 'ours' });
@@ -382,11 +387,11 @@
     const subjectEl = el('div', { class: 'mail-subject', dataset: { anchor: 'asunto' } }, mkHL('asunto', 'felicidades por la serie a'));
     const txt = el('div', { class: 'mail-text' },
       el('p', { dataset: { anchor: 'apertura' } }, mkHL('apertura', 'Qué tal Marcos,')),
-      el('p', { dataset: { anchor: 'gancho' } }, mkHL('gancho', 'Vi que cerraron la Serie A y van a abrir CDMX este trimestre'), ' — se nota que en Trackr se tomaron en serio el siguiente capítulo.'),
-      el('p', { dataset: { anchor: 'pain' } }, mkHL('pain', 'Justo después de una ronda, prospectar manual se cae sola'), ' — coordinar SDRs nuevos, vacantes abiertas y pipeline al mismo tiempo es complicado.'),
+      el('p', { dataset: { anchor: 'gancho' } }, mkHL('gancho', 'Vi que cerraron la Serie A y van a abrir CDMX este trimestre'), ', se nota que en Trackr se tomaron en serio el siguiente capítulo.'),
+      el('p', { dataset: { anchor: 'pain' } }, mkHL('pain', 'Justo después de una ronda, prospectar a mano se cae sola'), ', coordinar SDRs nuevos, vacantes abiertas y pipeline al mismo tiempo es demasiado.'),
       el('p', { dataset: { anchor: 'cta' } }, mkHL('cta', '¿Te aviento un video corto con cómo apoyamos a founders post-ronda a llenar su calendario con decisores reales?')),
       el('p', { dataset: { anchor: 'firma' } }, mkHL('firma', 'Un abrazo,')),
-      el('p', { class: 'mail-pd', dataset: { anchor: 'pd' } }, mkHL('pd', 'PD: vi que andan buscando 2 SDRs en Monterrey — justo lo que les ahorramos los primeros 90 días.'))
+      el('p', { class: 'mail-pd', dataset: { anchor: 'pd' } }, mkHL('pd', 'PD: vi que andan buscando 2 SDRs en Monterrey. Justo el trabajo que les quitamos los primeros 90 días.'))
     );
     mailInner.appendChild(subjectEl);
     mailInner.appendChild(txt);
@@ -466,8 +471,8 @@
     const section = el('section', { class: 'section mails-section', id: 'mails' },
       el('div', { class: 'section-inner' },
         el('div', { class: 'section-eyebrow' }, 'Los mails'),
-        el('h2', {}, 'Cada correo es ', el('em', { style: { fontStyle: 'normal', color: 'var(--accent)' } }, 'una decisión'), ', no una plantilla.'),
-        el('p', { class: 'lead' }, 'Esto no es spray-and-pray. Cada campaña se construye con segmentación quirúrgica y un ángulo pensado para ese nicho específico. Así se ve un correo por dentro.'),
+        el('h2', {}, 'Cada correo en frío es ', el('em', { style: { fontStyle: 'normal', color: 'var(--accent)' } }, 'una decisión'), ', no una plantilla.'),
+        el('p', { class: 'lead' }, 'Un correo bueno y uno malo cuestan lo mismo mandarlos. La diferencia está en las siete decisiones que se toman antes de darle a enviar. Estas son, sobre un correo real.'),
         el('div', { class: 'mails-grid' },
           el('div', { class: 'phone-stage' }, mock.node),
           stepsCol
@@ -571,10 +576,10 @@
 
   function ComoLoHago() {
     const cards = [
-      { num: '01', kicker: 'Diagnóstico',     title: 'Entendemos tu negocio primero', lines: ['Antes de enviar un solo correo, vemos tu empresa a fondo.', 'Qué vendes. A quién. Por qué deberían elegirte.', 'Definimos tu oferta, tu mensaje y tu ángulo.', 'Sin eso, no hay sistema que funcione.'] },
-      { num: '02', kicker: 'Infraestructura', title: 'Construimos la infraestructura', lines: ['Configuramos todo bien desde el inicio.', 'Dominios, cuentas, warm-up y entregabilidad.', 'La base importa.', 'Si fallas aquí, todo lo demás se cae.'] },
-      { num: '03', kicker: 'Lanzamiento',     title: 'Lanzamos y optimizamos',         lines: ['Enviamos. Medimos. Ajustamos.', 'Vemos datos reales: aperturas, respuestas, reuniones.', 'Lo que funciona se escala.', 'Lo que no, se mejora.'] },
-      { num: '04', kicker: 'Sistema',         title: 'Convertimos en sistema',         lines: ['No es una campaña.', 'Es un proceso repetible.', 'Reuniones constantes.', 'Crecimiento predecible.'] }
+      { num: '01', kicker: 'El censo',        title: 'Primero cuento tu mercado',     lines: ['Antes de escribir un correo, cuento cuántas empresas hay de verdad en tu nicho.', 'Por cargo, sector, tamaño y país. Con nombres que puedes reconocer.', 'Casi siempre salen bastantes menos de las que te dijeron.', 'Y si el número no da para tu meta, te lo digo ahí mismo.'] },
+      { num: '02', kicker: 'La base',         title: 'Monto la infraestructura',      lines: ['Dominios y buzones dedicados. Tu dominio de siempre no se toca.', 'Veintiún días de calentamiento antes del primer envío real.', 'Aquí es donde se cae la mayoría de las campañas.', 'Si esto falla, ya da igual lo bueno que sea el correo.'] },
+      { num: '03', kicker: 'La calle',        title: 'Escribo, lanzo y corrijo',      lines: ['Cada correo lleva un dato real de esa empresa concreta.', 'Salen, se miden y se corrigen contra respuestas de verdad.', 'El ángulo que contesta se queda y se escala.', 'El que no contesta se cambia, no se defiende.'] },
+      { num: '04', kicker: 'El régimen',      title: 'Se vuelve un sistema',          lines: ['Deja de ser una campaña con fecha de caducidad.', 'Es un proceso que se repite mes tras mes.', 'Reuniones que entran sin que tengas que empujar.', 'Y un número al que por fin le puedes hacer presupuesto.'] }
     ];
 
     const grid = el('ol', { class: 'proceso-grid', role: 'list' });
@@ -610,8 +615,8 @@
       ),
       el('div', { class: 'section-inner proceso-inner' },
         el('div', { class: 'section-eyebrow proceso-eyebrow' }, '¿Cómo lo hago?'),
-        el('h2', { class: 'proceso-title' }, 'Cuatro pasos. ', el('span', { class: 'proceso-title-accent' }, 'Un sistema que funciona.')),
-        el('p', { class: 'lead proceso-lead' }, 'Del diagnóstico al sistema. Así pasamos de cero a reuniones recurrentes en tu calendario.'),
+        el('h2', { class: 'proceso-title' }, 'Cuatro pasos, ', el('span', { class: 'proceso-title-accent' }, 'y el primero es contar.')),
+        el('p', { class: 'lead proceso-lead' }, 'Del censo de tu mercado a reuniones que entran solas. Esto es lo que pasa entre el día que firmamos y la primera conversación de negocio en tu calendario.'),
         grid
       )
     );
@@ -633,7 +638,7 @@
     const notifs = [
       { app: 'Mail',     time: 'ahora',    title: 'Laura · Re: Atlas v3',     text: '¿Tienes 15 min el jueves a las 10?' },
       { app: 'Mail',     time: 'hace 4m',  title: 'Diego · Re: Outbound Q2',  text: 'Sí, agenda directo en mi calendario.' },
-      { app: 'Calendar', time: 'hace 12m', title: 'Reunión confirmada',      text: 'Marta — Director Ventas · jueves 11:00' }
+      { app: 'Calendar', time: 'hace 12m', title: 'Reunión confirmada',      text: 'Marta · Directora Comercial · jueves 11:00' }
     ];
     const list = el('div', { class: 'notif-list' });
     notifs.forEach(n => {
@@ -664,15 +669,15 @@
 
   function PorqueNuncaMuere() {
     const bullets = [
-      { n: '01', h: 'Es el único canal que controlas tú',     p: 'No dependes de un algoritmo de TikTok ni del CPC de LinkedIn. Mientras existan bandejas de entrada, existe el canal.' },
-      { n: '02', h: 'Va directo al decisor',                  p: 'En B2B serio, las decisiones se firman por correo. Una llamada en frío se ignora; un correo bien hecho se lee al primer café.' },
-      { n: '03', h: 'Escala sin perder calidad',              p: 'La IA no mata el cold email — mata el cold email malo. Cuanto más ruido hay, más diferencia el correo con criterio, bien segmentado y con un ángulo real.' }
+      { n: '01', h: 'Es el único canal que controlas tú',     p: 'No dependes del algoritmo de nadie ni de lo que hoy cueste el clic en LinkedIn. Mientras existan bandejas de entrada el canal sigue en pie, y el precio no te lo sube una subasta.' },
+      { n: '02', h: 'Va directo al que firma',                p: 'En B2B serio las decisiones se cierran por correo. Una llamada en frío se cuelga en tres segundos. Un correo bien hecho se lee con el primer café y se contesta con calma.' },
+      { n: '03', h: 'El ruido juega a tu favor',              p: 'La IA no mató el correo en frío, mató el correo en frío perezoso. Cuanto más se llena la bandeja de plantillas, más destaca el único mensaje que demuestra que alguien miró esa empresa de verdad.' }
     ];
     return el('section', { class: 'porque-section' },
       el('div', { class: 'section-inner' },
         el('div', { class: 'section-eyebrow' }, 'El canal'),
-        el('h2', {}, '¿Por qué el cold email ', el('em', { style: { fontStyle: 'normal', color: 'var(--pl-blue-300)' } }, 'nunca'), ' muere?'),
-        el('p', { class: 'lead' }, 'Cada año alguien lo declara muerto. Cada año cierra más reuniones que cualquier otro canal outbound. Estas son las razones —resumidas, sin floritura.'),
+        el('h2', {}, '¿Por qué la prospección en frío por correo ', el('em', { style: { fontStyle: 'normal', color: 'var(--pl-blue-300)' } }, 'nunca'), ' muere?'),
+        el('p', { class: 'lead' }, 'Cada año alguien la declara muerta y cada año sigue abriendo más conversaciones de negocio que cualquier otro canal de salida. Tres razones, sin adorno.'),
         el('div', { class: 'porque-grid' },
           el('div', { class: 'porque-bullets' },
             ...bullets.map(b => el('div', { class: 'porque-bullet' },
@@ -692,17 +697,17 @@
   function XraySection() {
     // 4 cosas concretas que el reporte le devuelve al lead — sin jerga, "qué obtengo"
     const checks = [
-      { k: 'Score 0–100',     d: 'Un número claro de qué tan listo está tu setup para hacer outreach hoy.' },
-      { k: 'Lo que está mal', d: 'Lista de los problemas reales (con su impacto) — sin tecnicismos innecesarios.' },
-      { k: 'Cómo te ves',     d: 'Qué tan creíble eres para tu ICP cuando aterriza en tu firma, web o LinkedIn.' },
-      { k: 'Plan 90 días',    d: 'Qué arreglar esta semana, este mes y este trimestre. En orden de prioridad.' }
+      { k: 'Nota del 0 al 100', d: 'Qué tan listo está tu montaje para salir a prospectar hoy, en un solo número.' },
+      { k: 'Lo que está roto',  d: 'Los problemas reales y lo que te cuesta cada uno, contados en cristiano.' },
+      { k: 'Cómo te ven',       d: 'Qué credibilidad das cuando tu comprador aterriza en tu firma, tu web o tu LinkedIn.' },
+      { k: 'Plan a 90 días',    d: 'Qué arreglar esta semana, qué este mes y qué este trimestre. Por orden de prioridad.' }
     ];
 
     // 3 pasos para que entiendan el flujo en 5 segundos
     const steps = [
-      { n: '1', t: 'Pegas tu dominio',  d: 'Sin registro, sin tarjeta. Solo tudominio.com.' },
-      { n: '2', t: 'Escaneamos en vivo', d: 'En 30 segundos analizamos infraestructura, deliverability y posicionamiento.' },
-      { n: '3', t: 'Te damos el reporte', d: 'Score, problemas y plan de acción — PDF descargable si lo quieres pasar a tu equipo.' }
+      { n: '1', t: 'Pegas tu dominio',   d: 'Sin registro y sin tarjeta. Solo tuempresa.com.' },
+      { n: '2', t: 'Escaneamos en vivo',  d: 'En treinta segundos revisamos tu infraestructura, tu entregabilidad y cómo te posicionas.' },
+      { n: '3', t: 'Te damos el informe', d: 'Nota, problemas y plan de acción. En PDF, por si se lo quieres pasar a tu equipo.' }
     ];
 
     const score = el('div', { class: 'xray-score', 'aria-hidden': 'true' },
@@ -714,7 +719,7 @@
         el('span', { class: 'xs-big' }, '78'),
         el('span', { class: 'xs-slash' }, '/100')
       ),
-      el('div', { class: 'xray-score-label' }, 'Tu outreach · ahora')
+      el('div', { class: 'xray-score-label' }, 'Tu prospección · hoy')
     );
 
     const list = el('ul', { class: 'xray-checks', role: 'list' });
@@ -740,10 +745,10 @@
             el('h2', { class: 'xray-title' },
               'El ',
               el('span', { class: 'xray-title-accent' }, 'Xray'),
-              ' es un reporte gratis sobre la salud de tu outreach.'
+              ' es un informe gratis sobre la salud de tu prospección.'
             ),
             el('p', { class: 'xray-lead' },
-              'El Xray es un escaneo de 30 segundos a tu setup de outreach: revisa si tus dominios aguantan volumen, si tus correos van a llegar a inbox o spam, y cómo te ves frente a tu ICP. Te devuelve un score, los problemas que tienes y un plan a 90 días para arreglarlos. Sin costo, sin registro.'
+              'Un escaneo de treinta segundos a tu montaje de prospección. Revisa si tus dominios aguantan volumen, si tus correos van a caer en bandeja o en spam, y qué credibilidad das cuando alguien te busca. Te devuelve una nota, la lista de lo que está roto y un plan a 90 días. Gratis y sin registro.'
             ),
             el('ol', { class: 'xray-steps', role: 'list' },
               ...steps.map(s => el('li', { class: 'xray-step' },
@@ -800,12 +805,12 @@
      Replaces the metric dashboard — competence without numerical claims. */
   function Maquinaria() {
     const nodes = [
-      { num: '01', label: 'Scraper',         desc: 'Buscamos las cuentas que encajan con tu ICP — capa por capa de filtros.',                glyph: '<svg viewBox="0 0 48 48"><rect x="6" y="6" width="22" height="22" rx="1" fill="none" stroke="currentColor" stroke-width="1.5"/><line x1="11" y1="13" x2="22" y2="13" stroke="currentColor" stroke-width="1.2" opacity="0.5"/><line x1="11" y1="18" x2="20" y2="18" stroke="currentColor" stroke-width="1.2" opacity="0.5"/><line x1="11" y1="23" x2="18" y2="23" stroke="currentColor" stroke-width="1.2" opacity="0.5"/><circle cx="28" cy="28" r="8" fill="none" stroke="currentColor" stroke-width="1.5"/><line x1="34" y1="34" x2="42" y2="42" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>' },
-      { num: '02', label: 'Enriquecimiento', desc: 'Cada lead se pule con la información que importa: qué hacen, qué venden, qué cambió.', glyph: '<svg viewBox="0 0 48 48"><rect x="8" y="10" width="32" height="8" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.5"/><rect x="8" y="20" width="32" height="8" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.5"/><rect x="8" y="30" width="32" height="8" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.5"/><circle cx="13" cy="14" r="1.4" fill="currentColor"/><circle cx="13" cy="24" r="1.4" fill="currentColor"/><circle cx="13" cy="34" r="1.4" fill="currentColor"/><line x1="18" y1="14" x2="36" y2="14" stroke="currentColor" stroke-width="1.2" opacity="0.5"/><line x1="18" y1="24" x2="32" y2="24" stroke="currentColor" stroke-width="1.2" opacity="0.5"/><line x1="18" y1="34" x2="34" y2="34" stroke="currentColor" stroke-width="1.2" opacity="0.5"/></svg>' },
-      { num: '03', label: 'Calificador',     desc: 'Descartamos cuentas que no encajan antes de gastar tinta. Filtro duro.',                glyph: '<svg viewBox="0 0 48 48"><path d="M8 10 L40 10 L29 25 L29 38 L19 33 L19 25 Z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><line x1="13" y1="15" x2="35" y2="15" stroke="currentColor" stroke-width="1.2" opacity="0.45"/></svg>' },
-      { num: '04', label: 'Escritor',        desc: 'Construimos las secuencias con el ángulo correcto para ese nicho específico.',          glyph: '<svg viewBox="0 0 48 48"><line x1="10" y1="36" x2="36" y2="36" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><line x1="10" y1="30" x2="28" y2="30" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" opacity="0.6"/><path d="M30 8 L40 18 L20 38 L10 38 L10 28 Z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><line x1="28" y1="13" x2="35" y2="20" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>' },
-      { num: '05', label: 'Sender',          desc: 'Mailboxes dedicadas, warm-up de 21 días, deliverability monitoreada todos los días.',  glyph: '<svg viewBox="0 0 48 48"><path d="M6 24 L42 8 L34 40 L24 28 L6 24 Z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><line x1="24" y1="28" x2="42" y2="8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>' },
-      { num: '06', label: 'Calendar',        desc: 'Reuniones calificadas con decisores. En tu calendario, no en una hoja de cálculo.',     glyph: '<svg viewBox="0 0 48 48"><rect x="8" y="12" width="32" height="28" rx="2" fill="none" stroke="currentColor" stroke-width="1.5"/><line x1="8" y1="20" x2="40" y2="20" stroke="currentColor" stroke-width="1.5"/><line x1="16" y1="8" x2="16" y2="14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><line x1="32" y1="8" x2="32" y2="14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><polyline points="18,29 22,33 30,25" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>' }
+      { num: '01', label: 'Censo',           desc: 'Contamos y localizamos todas las empresas que encajan con tu cliente ideal, filtro sobre filtro.', glyph: '<svg viewBox="0 0 48 48"><rect x="6" y="6" width="22" height="22" rx="1" fill="none" stroke="currentColor" stroke-width="1.5"/><line x1="11" y1="13" x2="22" y2="13" stroke="currentColor" stroke-width="1.2" opacity="0.5"/><line x1="11" y1="18" x2="20" y2="18" stroke="currentColor" stroke-width="1.2" opacity="0.5"/><line x1="11" y1="23" x2="18" y2="23" stroke="currentColor" stroke-width="1.2" opacity="0.5"/><circle cx="28" cy="28" r="8" fill="none" stroke="currentColor" stroke-width="1.5"/><line x1="34" y1="34" x2="42" y2="42" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>' },
+      { num: '02', label: 'Enriquecimiento', desc: 'Cada empresa se estudia por su web y su LinkedIn: qué hacen, qué venden y qué les cambió este mes.', glyph: '<svg viewBox="0 0 48 48"><rect x="8" y="10" width="32" height="8" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.5"/><rect x="8" y="20" width="32" height="8" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.5"/><rect x="8" y="30" width="32" height="8" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.5"/><circle cx="13" cy="14" r="1.4" fill="currentColor"/><circle cx="13" cy="24" r="1.4" fill="currentColor"/><circle cx="13" cy="34" r="1.4" fill="currentColor"/><line x1="18" y1="14" x2="36" y2="14" stroke="currentColor" stroke-width="1.2" opacity="0.5"/><line x1="18" y1="24" x2="32" y2="24" stroke="currentColor" stroke-width="1.2" opacity="0.5"/><line x1="18" y1="34" x2="34" y2="34" stroke="currentColor" stroke-width="1.2" opacity="0.5"/></svg>' },
+      { num: '03', label: 'Criba',           desc: 'Fuera las que no encajan, antes de gastar un solo correo en ellas. El filtro es numérico, no de intuición.', glyph: '<svg viewBox="0 0 48 48"><path d="M8 10 L40 10 L29 25 L29 38 L19 33 L19 25 Z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><line x1="13" y1="15" x2="35" y2="15" stroke="currentColor" stroke-width="1.2" opacity="0.45"/></svg>' },
+      { num: '04', label: 'Redacción',       desc: 'Se escribe la secuencia con el ángulo de ese nicho y un dato propio de cada empresa.', glyph: '<svg viewBox="0 0 48 48"><line x1="10" y1="36" x2="36" y2="36" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><line x1="10" y1="30" x2="28" y2="30" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" opacity="0.6"/><path d="M30 8 L40 18 L20 38 L10 38 L10 28 Z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><line x1="28" y1="13" x2="35" y2="20" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>' },
+      { num: '05', label: 'Envío',           desc: 'Buzones dedicados, 21 días de calentamiento y entregabilidad revisada todos los días.', glyph: '<svg viewBox="0 0 48 48"><path d="M6 24 L42 8 L34 40 L24 28 L6 24 Z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><line x1="24" y1="28" x2="42" y2="8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>' },
+      { num: '06', label: 'Calendario',      desc: 'Reuniones con gente que decide la compra. En tu agenda, no en una hoja de cálculo.',    glyph: '<svg viewBox="0 0 48 48"><rect x="8" y="12" width="32" height="28" rx="2" fill="none" stroke="currentColor" stroke-width="1.5"/><line x1="8" y1="20" x2="40" y2="20" stroke="currentColor" stroke-width="1.5"/><line x1="16" y1="8" x2="16" y2="14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><line x1="32" y1="8" x2="32" y2="14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><polyline points="18,29 22,33 30,25" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>' }
     ];
 
     const flow = el('div', { class: 'maq-flow' });
@@ -850,10 +855,10 @@
           el('span', { class: 'maq-title-accent' }, 'paso a paso.'),
           ' Sin magia.'
         ),
-        el('p', { class: 'lead maq-lead' }, 'Esto es lo que ocurre entre el día que firmamos contigo y la primera reunión en tu calendario. Seis nodos. Cada uno hace una cosa, y solo una.'),
+        el('p', { class: 'lead maq-lead' }, 'Seis piezas encadenadas, cada una hace una sola cosa. Cuando una falla se ve exactamente dónde, que es la razón de partirlo así en vez de tener una caja negra.'),
         flow,
         el('div', { class: 'maq-footer' },
-          el('span', {}, '— Operado punta a punta. Tu equipo no toca ningún nodo. Tú solo abres el calendario.')
+          el('span', {}, 'Todo esto lo opero yo. Tu equipo no toca ninguna pieza, tú solo abres el calendario.')
         )
       )
     );
@@ -885,7 +890,7 @@
     for (let i = 0; i < TOTAL; i++) { const d = el('span', { class: 'sim-dot' }); dots.push(d); matrix.appendChild(d); }
 
     const pctNum = el('span', { class: 'sim-pct-num' }, '95');
-    const verdict = el('div', { class: 'sim-verdict good' }, 'Inbox. Tu dominio intacto.');
+    const verdict = el('div', { class: 'sim-verdict good' }, 'En bandeja. Tu dominio intacto.');
     const inboxCount = el('span', { class: 'sim-leg-num' }, '95');
     const spamCount = el('span', { class: 'sim-leg-num' }, '5');
     const warnNote = el('div', { class: 'sim-warn', style: { display: 'none' } });
@@ -912,8 +917,8 @@
       inboxCount.textContent = inbox;
       spamCount.textContent = TOTAL - inbox;
       let v, cls;
-      if (rate >= 0.9) { v = 'Inbox. Tu dominio intacto.'; cls = 'good'; }
-      else if (rate >= 0.7) { v = 'Pasable — pero dejas reuniones cayendo en spam.'; cls = 'warn'; }
+      if (rate >= 0.9) { v = 'En bandeja. Tu dominio intacto.'; cls = 'good'; }
+      else if (rate >= 0.7) { v = 'Pasable, pero estás dejando reuniones en la carpeta de spam.'; cls = 'warn'; }
       else { v = 'Te estás quemando. Esto es justo lo que NO hacemos.'; cls = 'bad'; }
       verdict.textContent = v;
       verdict.className = 'sim-verdict ' + cls;
@@ -970,12 +975,12 @@
     );
 
     screen.appendChild(el('div', { class: 'sim-screen-head' },
-      el('span', { class: 'sim-leg sim-leg-inbox' }, el('span', { class: 'sim-leg-dot' }), 'Inbox ', inboxCount),
+      el('span', { class: 'sim-leg sim-leg-inbox' }, el('span', { class: 'sim-leg-dot' }), 'Bandeja ', inboxCount),
       el('span', { class: 'sim-leg sim-leg-spam' }, el('span', { class: 'sim-leg-dot' }), 'Spam ', spamCount)
     ));
     screen.appendChild(matrix);
     screen.appendChild(el('div', { class: 'sim-screen-foot' },
-      el('div', { class: 'sim-pct' }, pctNum, el('span', { class: 'sim-pct-unit' }, '% a inbox')),
+      el('div', { class: 'sim-pct' }, pctNum, el('span', { class: 'sim-pct-unit' }, '% llega a bandeja')),
       verdict
     ));
 
@@ -984,7 +989,7 @@
       el('div', { class: 'section-inner sim-inner' },
         el('div', { class: 'section-eyebrow sim-eyebrow' }, 'La prueba'),
         el('h2', { class: 'sim-title' }, '¿Te van a ', el('span', { class: 'sim-title-accent' }, 'quemar el dominio?')),
-        el('p', { class: 'lead sim-lead' }, 'Juega con los controles. Mira en vivo a dónde caen tus 100 correos — y por qué mandar mucho, rápido y desde tu dominio principal es la receta del desastre.'),
+        el('p', { class: 'lead sim-lead' }, 'Mueve los controles y mira en vivo dónde acaban tus cien correos. Es la forma más rápida de entender por qué mandar mucho, rápido y desde tu dominio de siempre acaba mal.'),
         el('div', { class: 'sim-grid' }, controls, screen)
       )
     );
@@ -1025,19 +1030,19 @@
         el('div', { class: 'sobre-content' },
           el('h3', { class: 'sobre-greeting' }, 'Hey, soy ', el('span', { class: 'sobre-name' }, 'Gael'), '.'),
           el('div', { class: 'sobre-bio' },
-            el('p', { class: 'sobre-lead' }, 'Soy un emprendedor joven obsesionado con una cosa: conectar negocios con los decisores que ', el('em', {}, 'realmente'), ' mueven el juego — a través de cold email ejecutado con precisión.'),
+            el('p', { class: 'sobre-lead' }, 'Llevo ProspectLab21 desde Zapopan, Jalisco, con clientes reales en España y en LATAM. Escribo yo los correos, monto yo la infraestructura y llevo yo las campañas. Cuando te contesto un correo, soy yo, ', el('em', {}, 'no'), ' un becario con una plantilla.'),
             el('blockquote', { class: 'sobre-credo' },
               el('p', {}, 'No creo en la suerte.'),
-              el('p', {}, 'Creo en sistemas bien construidos y ejecución constante.')
+              el('p', {}, 'Creo en sistemas bien construidos y en aparecer todos los días.')
             ),
-            el('p', { class: 'sobre-discipline' }, 'Trabajo con disciplina, enfoque y mentalidad de largo plazo.')
+            el('p', { class: 'sobre-discipline' }, 'Si tu mercado no da, prefiero decírtelo en la primera llamada y perder la venta.')
           ),
           el('p', { class: 'sobre-punch' }, 'No prometo magia.'),
-          el('div', { class: 'sobre-principles', 'aria-label': 'Principios' },
-            el('span', {}, el('i', { 'aria-hidden': 'true' }), 'Disciplina'),
-            el('span', {}, el('i', { 'aria-hidden': 'true' }), 'Enfoque'),
-            el('span', {}, el('i', { 'aria-hidden': 'true' }), 'Largo plazo'),
-            el('span', {}, el('i', { 'aria-hidden': 'true' }), 'Sin magia')
+          el('div', { class: 'sobre-principles', 'aria-label': 'Cómo trabajo' },
+            el('span', {}, el('i', { 'aria-hidden': 'true' }), 'Cuento tu mercado antes de cobrarte'),
+            el('span', {}, el('i', { 'aria-hidden': 'true' }), 'Escribo yo cada correo'),
+            el('span', {}, el('i', { 'aria-hidden': 'true' }), 'Te digo que no si no encajas'),
+            el('span', {}, el('i', { 'aria-hidden': 'true' }), 'Sin permanencia')
           )
         )
       ),
@@ -1060,22 +1065,102 @@
   }
 
   /* ---------------- FAQ ---------------- */
+  /* DUEÑO ÚNICO del texto del FAQ.
+     Se renderiza aquí y de aquí se genera el JSON-LD de FAQPage (injectFaqSchema).
+     No dupliques estas respuestas en index.html ni en el <script type="application/ld+json">. */
   const FAQ_ITEMS = [
-    { q: '¿Qué hacen exactamente?', a: 'Operamos tu cold email B2B de punta a punta. Definimos a quién atacar —cargo, sector, tamaño de empresa y país—, construimos la lista con filtros reales en vez de comprar bases sucias, y escribimos secuencias personalizadas por nicho, no plantillas. Montamos la infraestructura de envío con dominios y buzones dedicados, lanzamos las campañas, hacemos pruebas A/B de asunto y ángulo, y clasificamos cada respuesta que llega. Lo único que aterriza en tu bandeja son conversaciones con gente que decide la compra. Tú entras a cerrar; nosotros mantenemos la máquina girando y reportando. Tu equipo no escribe un solo correo ni toca una hoja de cálculo.' },
-    { q: '¿Me van a quemar el dominio?', a: 'No, y el sistema está diseñado justo para que eso nunca pase. Nunca usamos tu dominio principal: montamos dominios y buzones dedicados solo para las campañas, separados de tu correo corporativo. Cada cuenta lleva 21 días de warm-up progresivo antes de mandar un correo a un lead real, y el volumen se escala poco a poco conforme madura la reputación de envío. Mantenemos el bounce por debajo del 2%, el ritmo conservador y revisamos la entregabilidad todos los días. Si una cuenta empieza a flaquear, la sacamos antes de que arrastre a las demás. Tu dominio de siempre queda intacto.' },
-    { q: '¿En cuánto tiempo empiezan a caer reuniones?', a: 'El rango normal son las primeras 2 a 3 semanas, aunque depende del nicho y de qué tan afilado esté tu cliente ideal. El mes 1 es setup y la primera oleada a volumen bajo, mientras los dominios terminan de calentarse. El mes 2 y 3 es donde el sistema entra en régimen: las campañas ya están afinadas con datos reales y las reuniones empiezan a caer de forma constante. No te voy a prometer veinte reuniones la primera semana —quien te promete eso, miente—. Te prometo un sistema que, una vez calibrado, produce conversaciones de negocio mes tras mes.' },
-    { q: '¿Qué necesitan de mí?', a: 'Poco, y casi todo en una sola llamada de diagnóstico de 20 minutos. Necesito que me cuentes a fondo tu cliente ideal y tu oferta —qué vendes, a quién y por qué te eligen— y acceso para crear los dominios y correos auxiliares. Validamos juntos el mensaje y el ángulo antes de lanzar nada, así que tienes la última palabra sobre cómo suena tu marca. No te pido listas de contactos, ni plantillas, ni que tú escribas los correos: de todo eso me encargo yo. A partir del lanzamiento, tu única tarea es presentarte a las reuniones que se agenden.' },
-    { q: '¿Les funciona cualquier sector?', a: 'No, y prefiero decírtelo de frente antes de cobrarte. El filtro es claro: B2B que le vende a otras empresas, con ticket medio por arriba de unos 3,000 USD/mes o un ciclo de venta consultivo. Agencias, software, reclutamiento, consultoras y servicios profesionales encajan muy bien porque ahí una sola reunión puede valer miles. Si tu producto es de ticket bajo, masivo o B2C, el cold email no es tu mejor canal y te lo digo en la llamada en lugar de venderte algo que no te va a funcionar. Y si conozco a alguien que sí trabaja tu caso, te lo paso.' },
-    { q: '¿Cuánto cuesta?', a: 'La inversión arranca en 600 € al mes, más una cuota de setup única que cubre toda la infraestructura —dominios, buzones y los 21 días de warm-up—. El número final depende del volumen de buzones, de cuántos países ataques y de tu ciclo de venta, así que te lo cierro concreto en la llamada. No bajo el precio para cerrar, pero tampoco te amarro con contratos largos: si a los 60 días no hay tracción real, nos salimos sin drama. La forma sana de verlo: con que cierres un cliente, el servicio normalmente ya se pagó solo.' },
-    { q: '¿Y si ya tengo SDR interno?', a: 'Mejor todavía, porque se suman. Un SDR caro se quema haciendo la parte mecánica: armar listas, buscar correos, mandar secuencias y perseguir follow-ups. Eso es justo lo que el sistema hace en automático y a escala. Nosotros le llenamos el calendario de reuniones calificadas y él se dedica a lo único que de verdad mueve la aguja: hablar con prospectos y cerrar. No reemplazo a tu equipo comercial, lo alimento para que pase el día vendiendo en vez de en hojas de cálculo. Si todavía no tienes SDR, el sistema te da el flujo de reuniones sin que tengas que contratar uno aún.' },
-    { q: '¿Mandan reportes?', a: 'Sí, y suele ser la parte que más se agradece. Tienes un dashboard con los números que de verdad importan —correos enviados, aperturas, respuestas y reuniones agendadas— y cada respuesta llega ya clasificada: interesado, tibio, no interesado, fuera de oficina o rebote, para que priorices a quién contestar primero. Cada quince días tenemos una llamada para revisar qué está funcionando y ajustar mensaje, ICP y volumen según lo que dicen los datos. Iteramos con números, no con corazonadas. En ningún momento te quedas adivinando si el sistema está dando resultados ni en qué se está yendo tu inversión.' }
+    {
+      q: '¿Qué hacen exactamente?',
+      short: 'Opero tu correo en frío de punta a punta. Tú no tocas nada.',
+      a: [
+        'Lo primero es contar tu mercado. Cuántas empresas hay de verdad en tu nicho por cargo, sector, tamaño y país, con nombres que puedes reconocer. Ese número casi siempre sale más chico que el que te enseñó otra agencia, y prefiero decírtelo antes de cobrarte que después.',
+        'Después construyo la lista con filtros reales en vez de comprar bases sucias, y escribo las secuencias para ese nicho. Monto los dominios y los buzones de envío, lanzo, pruebo asuntos y ángulos, y clasifico cada respuesta que entra. Lo único que aterriza en tu bandeja son conversaciones con gente que decide la compra.'
+      ]
+    },
+    {
+      q: '¿Me van a quemar el dominio?',
+      short: 'No. Tu dominio principal no se usa nunca.',
+      a: [
+        'Monto dominios y buzones dedicados solo para las campañas, separados de tu correo corporativo. Cada cuenta lleva 21 días de calentamiento progresivo antes de escribirle a una empresa real, y el volumen sube despacio conforme madura la reputación de envío.',
+        'Mantengo el rebote por debajo del 2% y reviso la entregabilidad todos los días. Si una cuenta empieza a flaquear la saco antes de que arrastre a las demás. Tu dominio de siempre queda intacto, y ese es justo el punto de montar la infraestructura aparte.'
+      ]
+    },
+    {
+      q: '¿En cuánto tiempo empiezan a caer reuniones?',
+      short: 'Las primeras respuestas entre la semana 2 y la 3. Reuniones constantes, del mes 2 en adelante.',
+      a: [
+        'El mes 1 es montaje y la primera oleada a volumen bajo, mientras los dominios terminan de calentarse. El mes 2 y el 3 son donde el sistema entra en régimen, con las campañas ya afinadas contra respuestas reales y no contra suposiciones.',
+        'No te voy a prometer veinte reuniones la primera semana. Quien te promete eso, miente. Lo que sí te prometo es un sistema que, una vez calibrado, abre conversaciones de negocio mes tras mes.'
+      ]
+    },
+    {
+      q: '¿Qué necesitan de mí?',
+      short: 'Una llamada de 20 minutos y permiso para crear los dominios de envío. Nada más.',
+      a: [
+        'Necesito que me cuentes a fondo tu cliente ideal y tu oferta. Qué vendes, a quién y por qué te eligen a ti. Validamos juntos el mensaje y el ángulo antes de lanzar nada, así que tienes la última palabra sobre cómo suena tu marca.',
+        'No te pido listas de contactos, ni plantillas, ni que escribas los correos. De eso me encargo yo. A partir del lanzamiento tu única tarea es presentarte a las reuniones que se agenden.'
+      ]
+    },
+    {
+      q: '¿Les funciona cualquier sector?',
+      short: 'No, y prefiero decírtelo antes de cobrarte.',
+      a: [
+        'El filtro es concreto. Le vendes a otras empresas, tu comprador vive en el correo, la decisión la toma una sola persona y un cliente tuyo vale al menos 10,000 dólares a lo largo de la relación. Agencias, software, reclutamiento, consultoras y servicios profesionales suelen entrar sin problema.',
+        'Si tu producto es de ticket bajo, masivo o de consumo, el correo en frío no es tu mejor canal y te lo digo en la llamada en vez de venderte algo que no te va a funcionar. Y si conozco a alguien que sí trabaje tu caso, te paso el contacto.'
+      ]
+    },
+    {
+      q: '¿Cuánto cuesta?',
+      short: '450 € al mes más 350 € de arranque en España. En México y LATAM, lo mismo en dólares.',
+      a: [
+        'El arranque es un pago único que cubre la infraestructura completa: dominios, buzones y los 21 días de calentamiento. El número final depende de cuántos buzones necesites, de cuántos países quieras atacar y de tu ciclo de venta, así que te lo cierro concreto en la llamada.',
+        'No bajo el precio para cerrar y tampoco te amarro con contratos largos. Si a los 60 días no hay tracción real, nos salimos sin drama. La forma sana de verlo es esta: con que cierres un cliente, el servicio normalmente ya se pagó solo.'
+      ]
+    },
+    {
+      q: '¿Y si ya tengo un SDR interno?',
+      short: 'Mejor, porque se suman. Yo le lleno el calendario y él cierra.',
+      a: [
+        'Un SDR caro se quema en la parte mecánica: armar listas, buscar correos, mandar secuencias y perseguir seguimientos. Eso es justo lo que el sistema hace en automático y a escala, sin cansarse ni pedir vacaciones.',
+        'No reemplazo a tu equipo comercial, lo alimento para que pase el día hablando con prospectos en vez de peleándose con una hoja de cálculo. Y si todavía no tienes SDR, tienes el flujo de reuniones sin necesidad de contratar uno todavía.'
+      ]
+    },
+    {
+      q: '¿Mandan reportes?',
+      short: 'Sí. Un panel con envíos, respuestas y reuniones, y una llamada de ajuste cada quince días.',
+      a: [
+        'Cada respuesta te llega ya clasificada como interesado, tibio, no interesado, fuera de oficina o rebote, para que sepas a quién contestar primero sin tener que leerlas todas.',
+        'Hay una métrica que no vas a ver en el panel, y es a propósito: la tasa de apertura. Medir aperturas obliga a meter un píxel de rastreo en cada correo, y ese píxel es de las cosas que más te empujan a spam. Prefiero perder el número y ganar la bandeja de entrada. Lo que se mide aquí son respuestas y reuniones, que es lo que paga.'
+      ]
+    },
+    {
+      q: '¿Trabajan en España o en LATAM?',
+      short: 'En los dos. España en castellano peninsular, LATAM adaptado.',
+      a: [
+        'Opero campañas en España, México, Chile, Colombia y el resto de LATAM hispanohablante. El registro del copy lo manda el mercado al que escribes, no el país donde está tu empresa. Si eres una empresa mexicana que vende en Madrid, tus correos salen en castellano peninsular.',
+        'Es un detalle que casi nadie cuida y que se nota en el primer renglón. Un vosotros mal puesto en Monterrey, o un ustedes en Barcelona, y el que lee ya sabe que es un envío masivo.'
+      ]
+    },
+    {
+      q: '¿En qué se diferencian de otra agencia de cold email?',
+      short: 'En que te cuento tu mercado antes de cobrarte.',
+      a: [
+        'Casi todas las agencias te venden un volumen de envíos. Tres mil correos al mes, cinco mil al mes. Ninguna te dice cuántas empresas hay de verdad en tu nicho, porque si el número sale chico se les cae la venta.',
+        'Yo lo cuento primero y te enseño los nombres. Si tu mercado son 200 empresas y no 4,000, lo vas a saber en la llamada y gratis. A partir de ahí la conversación es honesta: sabes cuándo se te agota el mercado, y sabes por qué el que llega primero se lo queda.'
+      ]
+    }
   ];
 
   function FAQ() {
     const list = el('div', { class: 'faq-list', role: 'list' });
     FAQ_ITEMS.forEach((item, i) => {
       const id = 'faq-' + i;
-      const ans = el('div', { class: 'faq-answer', id: id + '-a', role: 'region' }, el('p', {}, item.a));
+      const ans = el('div', { class: 'faq-answer', id: id + '-a', role: 'region' },
+        el('div', { class: 'faq-answer-inner' },
+          el('p', { class: 'faq-a-short' }, item.short),
+          ...item.a.map(t => el('p', { class: 'faq-a-p' }, t))
+        )
+      );
       const btn = el('button', { type: 'button', class: 'faq-question', 'aria-expanded': 'false', 'aria-controls': id + '-a' },
         el('span', { class: 'faq-q-text' }, item.q),
         el('span', { class: 'faq-q-icon', 'aria-hidden': 'true' })
@@ -1083,9 +1168,8 @@
       btn.addEventListener('click', () => {
         const open = btn.getAttribute('aria-expanded') === 'true';
         btn.setAttribute('aria-expanded', String(!open));
-        item.q && row.classList.toggle('is-open', !open);
-        if (!open) ans.style.maxHeight = ans.scrollHeight + 'px';
-        else ans.style.maxHeight = '0px';
+        row.classList.toggle('is-open', !open);
+        ans.style.maxHeight = open ? '0px' : ans.scrollHeight + 'px';
       });
       const row = el('div', { class: 'faq-row', role: 'listitem', id }, btn, ans);
       list.appendChild(row);
@@ -1094,10 +1178,82 @@
       el('div', { class: 'section-inner' },
         el('div', { class: 'section-eyebrow' }, 'Lo que siempre me preguntan'),
         el('h2', {}, 'Lo que vas a querer saber ', el('em', { style: { fontStyle: 'normal', color: 'var(--accent)' } }, 'antes'), ' de la llamada.'),
-        el('p', { class: 'lead' }, 'Las dudas reales que escuchamos cada semana. Sin rodeos, sin letra chica.'),
+        el('p', { class: 'lead' }, 'Las diez preguntas que me hacen cada semana, contestadas como te las contestaría por teléfono. Sin rodeos y sin letra chica.'),
         list
       )
     );
+  }
+
+  /* ---------------- PRECIO ----------------
+     El precio vive AQUÍ y en el FAQ. Si cambia, se cambia en los dos sitios.
+     Fuente de verdad del negocio: memoria fb_pricing_below_market. */
+  const PRECIO_INCLUYE = [
+    'El censo de tu mercado, con el número real de empresas y sus nombres.',
+    'Dominios y buzones dedicados, con sus 21 días de calentamiento.',
+    'La lista construida a mano y verificada, correo por correo.',
+    'Las secuencias escritas para tu nicho, con pruebas de asunto y de ángulo.',
+    'La operación diaria de las campañas y la entregabilidad vigilada.',
+    'Cada respuesta clasificada y un panel con envíos, respuestas y reuniones.',
+    'Una llamada de ajuste cada quince días.'
+  ];
+
+  function Precio() {
+    const card = (mercado, cifra, setup, nota) => el('article', { class: 'precio-card' },
+      el('div', { class: 'precio-mercado' }, mercado),
+      el('div', { class: 'precio-cifra' },
+        el('span', { class: 'pc-num' }, cifra),
+        el('span', { class: 'pc-per' }, 'al mes')
+      ),
+      el('div', { class: 'precio-setup' }, setup),
+      el('div', { class: 'precio-nota-card' }, nota)
+    );
+
+    const incluye = el('ul', { class: 'precio-incluye', role: 'list' });
+    PRECIO_INCLUYE.forEach(t => incluye.appendChild(
+      el('li', {}, el('span', { class: 'pi-tick', 'aria-hidden': 'true' }), el('span', {}, t))
+    ));
+
+    const section = el('section', { class: 'precio-section', id: 'precio' },
+      el('div', { class: 'section-inner' },
+        el('div', { class: 'section-eyebrow' }, 'Precio'),
+        el('h2', {}, 'El precio, ', el('em', { style: { fontStyle: 'normal', color: 'var(--accent)' } }, 'antes'), ' de que me lo preguntes.'),
+        el('p', { class: 'lead' }, 'Un solo precio para todos. Ni tarifa secreta, ni descuento por insistir, ni doce llamadas para llegar al número. Cobro en la moneda de tu mercado porque mis costes están en dólares y no quiero pasarte a ti el riesgo del cambio.'),
+        el('div', { class: 'precio-grid' },
+          card('España', '450 €', 'más 350 € de arranque, pago único', 'Copy en castellano peninsular.'),
+          card('México y LATAM', '450 USD', 'más 350 USD de arranque, pago único', 'Copy adaptado a cada país.')
+        ),
+        el('h3', { class: 'precio-sub' }, 'Qué entra por ese dinero'),
+        incluye,
+        el('p', { class: 'precio-honesto' }, 'No bajo el precio para cerrar, y tampoco te amarro. Si a los 60 días no hay tracción real nos salimos sin drama. Con que cierres un cliente, el servicio normalmente ya se pagó solo.'),
+        el('div', { class: 'precio-cta' },
+          el('a', { class: 'btn btn-primary', href: CAL_URL, target: '_blank', rel: 'noopener' }, 'Agenda 20 minutos', Icon('arrow-right', 16)),
+          el('span', { class: 'precio-cta-note' }, 'Sales de la llamada sabiendo el tamaño real de tu mercado, contrates o no.')
+        )
+      )
+    );
+    return section;
+  }
+
+  /* ---------------- JSON-LD DEL FAQ ----------------
+     Se genera desde FAQ_ITEMS para que el texto viva en un solo sitio.
+     Google ejecuta JS y lee datos estructurados inyectados así. */
+  function injectFaqSchema() {
+    try {
+      const data = {
+        '@context': 'https://schema.org',
+        '@type': 'FAQPage',
+        '@id': 'https://prospectlab21.com/#faq',
+        mainEntity: FAQ_ITEMS.map(it => ({
+          '@type': 'Question',
+          name: it.q,
+          acceptedAnswer: { '@type': 'Answer', text: [it.short].concat(it.a).join(' ') }
+        }))
+      };
+      const s = document.createElement('script');
+      s.type = 'application/ld+json';
+      s.textContent = JSON.stringify(data);
+      document.head.appendChild(s);
+    } catch (_) {}
   }
 
   /* ---------------- CTA ---------------- */
@@ -1106,20 +1262,20 @@
       el('div', { class: 'cta-bg' }),
       el('div', { class: 'cta-inner' },
         el('div', { class: 'cta-eyebrow' }, 'Empezamos aquí'),
-        el('h2', {}, 'Vamos por', el('br'), 'tu primer mail.'),
-        el('p', { class: 'cta-sub' }, 'Una llamada de 20 minutos. Te digo si tu producto encaja con lo que hacemos — y si no, te paso a alguien que sí.'),
+        el('h2', {}, 'Vamos a contar', el('br'), 'tu mercado.'),
+        el('p', { class: 'cta-sub' }, 'Veinte minutos. Salgo de esa llamada habiéndote dicho cuántas empresas hay de verdad en tu nicho, y si el correo en frío es tu canal o no lo es. Si no lo es, te lo digo y te paso a alguien que sí trabaje tu caso.'),
         el('div', { class: 'cta-btn-row' },
-          el('a', { class: 'cta-btn', href: CAL_URL, target: '_blank', rel: 'noopener' }, 'Agenda una llamada', el('span', { class: 'arrow' }, Icon('arrow-ur', 20))),
+          el('a', { class: 'cta-btn', href: CAL_URL, target: '_blank', rel: 'noopener' }, 'Agenda 20 minutos', el('span', { class: 'arrow' }, Icon('arrow-ur', 20))),
           el('a', { class: 'cta-btn cta-btn-audit', href: XRAY_URL, target: '_blank', rel: 'noopener' },
             el('span', { class: 'cta-btn-audit-dot', 'aria-hidden': 'true' }),
-            'Reporte Xray de mi outreach',
+            'Xray gratis de mi prospección',
             el('span', { class: 'cta-btn-audit-free' }, 'gratis')
           )
         ),
         el('div', { class: 'cta-meta' },
           el('span', {}, '· 20 MIN'),
           el('span', {}, '· SIN COMPROMISO'),
-          el('span', {}, '· RESPUESTA EN 24H')
+          el('span', {}, '· TE CONTESTO EN 24 H')
         ),
         el('p', { class: 'cta-alt' },
           '¿Prefieres correo? Escríbeme directo a ',
@@ -1138,13 +1294,14 @@
           el('span', {}, 'PROSPECTLAB 21')
         ),
         el('div', { class: 'footer-links' },
-          el('a', { href: '#mails' }, 'Cómo funciona'),
+          el('a', { href: '#mails' }, 'El correo'),
           el('a', { href: '#proceso' }, 'Proceso'),
           el('a', { href: '#maquinaria' }, 'La maquinaria'),
-          el('a', { href: '#faq' }, 'FAQ'),
+          el('a', { href: '#precio' }, 'Precio'),
+          el('a', { href: '#faq' }, 'Preguntas'),
           el('a', { href: 'mailto:gael@prospectlab21.com' }, 'Contacto')
         ),
-        el('div', { class: 'footer-meta' }, '© 2026 ProspectLab21 — Hecho con atención, correo a correo')
+        el('div', { class: 'footer-meta' }, '© 2026 ProspectLab21 · Hecho con atención, correo a correo')
       )
     );
   }
@@ -1268,7 +1425,7 @@
       el('div', { class: 'section-inner' },
         el('div', { class: 'section-eyebrow' }, 'Lo que dicen mis clientes'),
         el('h2', {}, 'No tienes que creerme ', el('em', { style: { fontStyle: 'normal', color: 'var(--accent)' } }, 'a mí'), '.'),
-        el('p', { class: 'lead' }, 'Clientes reales contando, en su propia voz, cómo les cambió el pipeline.'),
+        el('p', { class: 'lead' }, 'Clientes reales contando con su propia voz cómo les cambió la agenda.'),
         grid
       )
     );
@@ -1292,10 +1449,18 @@
     root.appendChild(SobreMi());
     const testi = Testimonios();
     if (testi) root.appendChild(testi);
+    root.appendChild(Precio());
     root.appendChild(FAQ());
     root.appendChild(CTA());
     root.appendChild(Footer());
 
+    // El bloque de texto para buscadores deja de estar oculto: se coloca antes
+    // del pie como sección visible. Contenido oculto y duplicado no ayuda a nadie.
+    const seo = document.getElementById('seo-content');
+    if (seo) root.insertBefore(seo, root.lastChild);
+    document.documentElement.classList.add('booted');
+
+    injectFaqSchema();
     setupCursor();
     setupEventTracking();
 

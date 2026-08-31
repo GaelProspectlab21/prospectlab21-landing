@@ -6,8 +6,8 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
 <!-- ====== PRIMARY SEO ====== -->
-<title>ProspectLab21 — Cold email B2B que agenda reuniones con decisores</title>
-<meta name="description" content="Agencia de cold email B2B. Segmentamos cuentas con precisión, armamos las secuencias y agendamos reuniones calificadas con decisores. Sin plantillas genéricas, sin spam. Operamos en España, México, Chile y LATAM.">
+<title>Agencia de cold email B2B en España y LATAM | ProspectLab21</title>
+<meta name="description" content="Cuento cuántas empresas hay de verdad en tu nicho y les escribo a todas, una por una. Agencia de cold email B2B en España, México y LATAM. Desde 450 € al mes.">
 <link rel="canonical" href="https://prospectlab21.com/">
 <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
 <meta name="googlebot" content="index, follow">
@@ -15,8 +15,6 @@
 <meta name="theme-color" content="#000000">
 <meta name="color-scheme" content="light">
 <link rel="alternate" hreflang="es" href="https://prospectlab21.com/">
-<link rel="alternate" hreflang="es-ES" href="https://prospectlab21.com/">
-<link rel="alternate" hreflang="es-MX" href="https://prospectlab21.com/">
 <link rel="alternate" hreflang="x-default" href="https://prospectlab21.com/">
 
 <!-- ====== OPEN GRAPH ====== -->
@@ -24,18 +22,18 @@
 <meta property="og:site_name" content="ProspectLab21">
 <meta property="og:locale" content="es_ES">
 <meta property="og:locale:alternate" content="es_MX">
-<meta property="og:title" content="ProspectLab21 — Cold email B2B que agenda reuniones con decisores">
-<meta property="og:description" content="Segmentamos cuentas con precisión, armamos las secuencias y agendamos reuniones calificadas con decisores. Sin plantillas genéricas, sin spam.">
+<meta property="og:title" content="Agencia de cold email B2B en España y LATAM | ProspectLab21">
+<meta property="og:description" content="Primero cuento tu mercado y te doy los nombres. Después les escribo a todas, una por una, con un correo hecho a mano. Reuniones con decisores, no clics.">
 <meta property="og:url" content="https://prospectlab21.com/">
 <meta property="og:image" content="https://prospectlab21.com/assets/og-image.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="ProspectLab21 — Agencia de cold email B2B">
+<meta property="og:image:alt" content="ProspectLab21, agencia de cold email B2B">
 
 <!-- ====== TWITTER ====== -->
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="ProspectLab21 — Cold email B2B que agenda reuniones">
-<meta name="twitter:description" content="Segmentamos cuentas con precisión, armamos las secuencias y agendamos reuniones calificadas con decisores.">
+<meta name="twitter:title" content="Cold email B2B en España y LATAM | ProspectLab21">
+<meta name="twitter:description" content="Primero cuento tu mercado y te doy los nombres. Después les escribo a todas, una por una, con un correo hecho a mano. Reuniones con decisores, no clics.">
 <meta name="twitter:image" content="https://prospectlab21.com/assets/og-image.jpg">
 
 <!-- ====== ICONS / MANIFEST ====== -->
@@ -56,7 +54,7 @@
 <!-- ====== STYLES ====== -->
 <link rel="preload" as="image" href="assets/logo-mark.png">
 <link rel="stylesheet" href="styles/tokens.css">
-<link rel="stylesheet" href="styles/landing.css?v=24">
+<link rel="stylesheet" href="styles/landing.css?v=25">
 
 <!-- ====== CRITICAL CSS (inline, anti-FOUC for hero) ====== -->
 <style>
@@ -75,12 +73,15 @@
     transition: top 200ms ease;
   }
   .skip-link:focus { top:8px; }
-  /* SEO/GEO content: base visible (crawlers e IAs sin JS); se oculta cuando app.js monta la versión animada */
+  /* Texto para buscadores e IAs. Visible sin JS. Con JS espera a que app.js lo
+     coloque sobre el pie y marque <html class="booted">, para que no parpadee arriba.
+     Antes se ocultaba para siempre cuando había JS, y eso lo hacía invisible
+     justo para el rastreador de Google, que sí ejecuta JS. */
   #seo-content { max-width: 760px; margin: 0 auto; padding: 48px 20px 80px; line-height: 1.6; }
-  #seo-content h1 { font-family: "Space Grotesk", sans-serif; font-size: 28px; line-height: 1.25; }
   #seo-content h2 { font-family: "Space Grotesk", sans-serif; font-size: 20px; margin: 32px 0 8px; }
   #seo-content a { color: #5c85ff; }
   html.js #seo-content { display: none; }
+  html.js.booted #seo-content { display: block; }
 </style>
 
 <!-- ====== STRUCTURED DATA ====== -->
@@ -97,8 +98,8 @@
       "email": "gael@prospectlab21.com",
       "founder": { "@id": "https://prospectlab21.com/#gael" },
       "areaServed": ["ES","MX","CL","LATAM"],
-      "description": "Agencia Done-For-You de cold email B2B. Segmentamos cuentas con precisión, armamos las secuencias y agendamos reuniones calificadas con decisores.",
-      "knowsAbout": ["Cold email","Lead generation B2B","Outbound sales","Email deliverability","Prospección B2B"],
+      "description": "Agencia de cold email B2B. Contamos el mercado completo del cliente, empresa por empresa, y le escribimos a cada una con un correo hecho a mano hasta agendar reuniones con quien decide la compra.",
+      "knowsAbout": ["Cold email B2B","Prospección en frío","Generación de leads B2B","Outbound","Entregabilidad de correo","Agendar reuniones con decisores"],
       "contactPoint": [{
         "@type": "ContactPoint",
         "contactType": "sales",
@@ -124,19 +125,10 @@
       "serviceType": "Cold email outreach",
       "areaServed": ["España","México","Chile","LATAM"],
       "audience": { "@type": "Audience", "audienceType": "Fundadores, directores comerciales, equipos B2B" },
-      "description": "Sistema de cold email B2B operado punta a punta: segmentación quirúrgica de cuentas, secuencias personalizadas por nicho, infraestructura de envío con dominios dedicados, gestión de respuestas y reporting semanal."
-    },
-    {
-      "@type": "FAQPage",
-      "mainEntity": [
-        { "@type": "Question", "name": "¿Qué hacen exactamente?", "acceptedAnswer": { "@type": "Answer", "text": "Operamos tu cold email B2B de punta a punta. Definimos a quién atacar (cargo, sector, tamaño de empresa y país), construimos la lista con filtros reales en vez de comprar bases sucias, y escribimos secuencias personalizadas por nicho, no plantillas. Montamos la infraestructura de envío con dominios y buzones dedicados, lanzamos las campañas, hacemos pruebas A/B de asunto y ángulo, y clasificamos cada respuesta que llega. Lo único que aterriza en tu bandeja son conversaciones con gente que decide la compra. Tu equipo no escribe un solo correo ni toca una hoja de cálculo." } },
-        { "@type": "Question", "name": "¿Me van a quemar el dominio?", "acceptedAnswer": { "@type": "Answer", "text": "No, y el sistema está diseñado justo para que eso nunca pase. Nunca usamos tu dominio principal: montamos dominios y buzones dedicados solo para las campañas, separados de tu correo corporativo. Cada cuenta lleva 21 días de warm-up progresivo antes de mandar un correo a un lead real, y el volumen se escala poco a poco conforme madura la reputación de envío. Mantenemos el bounce por debajo del 2%, el ritmo conservador y revisamos la entregabilidad todos los días. Tu dominio de siempre queda intacto." } },
-        { "@type": "Question", "name": "¿En cuánto tiempo empiezan a caer reuniones?", "acceptedAnswer": { "@type": "Answer", "text": "El rango normal son las primeras 2 a 3 semanas, aunque depende del nicho y de qué tan afilado esté tu cliente ideal. El mes 1 es setup y la primera oleada a volumen bajo, mientras los dominios terminan de calentarse. El mes 2 y 3 es donde el sistema entra en régimen: las campañas ya están afinadas con datos reales y las reuniones empiezan a caer de forma constante. Una vez calibrado, el sistema produce conversaciones de negocio mes tras mes." } },
-        { "@type": "Question", "name": "¿Qué necesitan de mí?", "acceptedAnswer": { "@type": "Answer", "text": "Poco, y casi todo en una sola llamada de diagnóstico de 20 minutos. Necesito que me cuentes a fondo tu cliente ideal y tu oferta (qué vendes, a quién y por qué te eligen) y acceso para crear los dominios y correos auxiliares. Validamos juntos el mensaje y el ángulo antes de lanzar nada. No te pido listas de contactos, ni plantillas, ni que tú escribas los correos: de todo eso me encargo yo. A partir del lanzamiento, tu única tarea es presentarte a las reuniones que se agenden." } },
-        { "@type": "Question", "name": "¿Les funciona cualquier sector?", "acceptedAnswer": { "@type": "Answer", "text": "No, y prefiero decírtelo de frente antes de cobrarte. El filtro es claro: B2B que le vende a otras empresas, con ticket medio por arriba de unos 3,000 USD/mes o un ciclo de venta consultivo. Agencias, software, reclutamiento, consultoras y servicios profesionales encajan muy bien porque ahí una sola reunión puede valer miles. Si tu producto es de ticket bajo, masivo o B2C, el cold email no es tu mejor canal y te lo digo en la llamada en lugar de venderte algo que no te va a funcionar." } },
-        { "@type": "Question", "name": "¿Cuánto cuesta?", "acceptedAnswer": { "@type": "Answer", "text": "La inversión arranca en 600 € al mes, más una cuota de setup única que cubre toda la infraestructura (dominios, buzones y los 21 días de warm-up). El número final depende del volumen de buzones, de cuántos países ataques y de tu ciclo de venta, así que te lo cierro concreto en la llamada. No bajo el precio para cerrar, pero tampoco te amarro con contratos largos: si a los 60 días no hay tracción real, nos salimos sin drama. Con que cierres un cliente, el servicio normalmente ya se pagó solo." } },
-        { "@type": "Question", "name": "¿Y si ya tengo SDR interno?", "acceptedAnswer": { "@type": "Answer", "text": "Mejor todavía, porque se suman. Un SDR caro se quema haciendo la parte mecánica: armar listas, buscar correos, mandar secuencias y perseguir follow-ups. Eso es justo lo que el sistema hace en automático y a escala. Nosotros le llenamos el calendario de reuniones calificadas y él se dedica a lo único que de verdad mueve la aguja: hablar con prospectos y cerrar. No reemplazo a tu equipo comercial, lo alimento para que pase el día vendiendo en vez de en hojas de cálculo." } },
-        { "@type": "Question", "name": "¿Mandan reportes?", "acceptedAnswer": { "@type": "Answer", "text": "Sí, y suele ser la parte que más se agradece. Tienes un dashboard con los números que de verdad importan (correos enviados, aperturas, respuestas y reuniones agendadas) y cada respuesta llega ya clasificada: interesado, tibio, no interesado, fuera de oficina o rebote, para que priorices a quién contestar primero. Cada quince días tenemos una llamada para ajustar mensaje, ICP y volumen según lo que dicen los datos. Iteramos con números, no con corazonadas." } }
+      "description": "Cold email B2B operado de principio a fin: censo del mercado del cliente con nombres, lista construida a mano, dominios y buzones dedicados con 21 días de calentamiento, secuencias escritas por nicho, respuestas clasificadas y reuniones agendadas con decisores.",
+      "offers": [
+        { "@type": "Offer", "name": "España", "price": "450", "priceCurrency": "EUR", "availability": "https://schema.org/InStock", "description": "450 € al mes más 350 € de arranque, pago único." },
+        { "@type": "Offer", "name": "México y LATAM", "price": "450", "priceCurrency": "USD", "availability": "https://schema.org/InStock", "description": "450 USD al mes más 350 USD de arranque, pago único." }
       ]
     },
     {
@@ -153,8 +145,7 @@
 
 <!-- Marca JS-activo antes de pintar: oculta el bloque SEO estático para usuarios con JS (app.js monta la versión animada) -->
 <script>document.documentElement.classList.add('js');</script>
-<!-- Vercel Web Analytics (visitantes únicos, páginas, países, referrers) -->
-<script defer src="/_vercel/insights/script.js"></script>
+<!-- La analitica de Vercel se carga UNA vez, al final del body. Estaba duplicada. -->
 <!-- Pixel propio → Google Sheet, tab "Trafico Web" -->
 <script>
   (function () {
@@ -184,40 +175,27 @@
 
 <!-- ====== CONTENIDO PARA CRAWLERS E IAs (progressive enhancement: visible sin JS, oculto con JS) ====== -->
 <main id="seo-content">
-  <h1>ProspectLab21 — Agencia de cold email B2B (Done-For-You)</h1>
-  <p>ProspectLab21 es una agencia Done-For-You de cold email B2B que genera reuniones calificadas con tomadores de decisión para empresas que venden a otras empresas. Operamos todo el sistema de prospección en frío de punta a punta: segmentamos las cuentas objetivo hasta el último filtro por nicho, país y cargo; montamos la infraestructura de envío con dominios y buzones dedicados y calentamiento de 21 días; redactamos secuencias personalizadas por lead, sin plantillas genéricas; lanzamos las campañas, monitoreamos la entregabilidad a diario y clasificamos cada respuesta. El cliente no toca un solo correo: recibe reuniones agendadas en su calendario y un reporte semanal. Trabajamos con empresas B2B de ticket medio en España, México, Chile y el resto de LATAM hispanohablante. Fundada por Gael Sosa, ProspectLab21 se especializa en outbound predecible para agencias, software, reclutamiento y servicios profesionales.</p>
+  <h2>Qué es ProspectLab21</h2>
+  <p>ProspectLab21 es una agencia de cold email B2B que trabaja con empresas de España, México, Chile, Colombia y el resto de LATAM hispanohablante. No vendemos una herramienta ni un curso de prospección en frío: operamos el canal completo, de principio a fin, y el cliente no escribe ni un solo correo.</p>
+  <p>Todo arranca contando el mercado. Cuántas empresas hay de verdad en ese nicho por cargo, sector, tamaño y país, con nombres concretos que el cliente puede reconocer. Con ese número encima de la mesa construimos la lista, montamos dominios y buzones de envío dedicados con veintiún días de calentamiento, escribimos las secuencias con un dato real de cada empresa, lanzamos, vigilamos la entregabilidad todos los días y clasificamos cada respuesta. Lo que llega al calendario del cliente son reuniones con gente que decide la compra.</p>
 
-  <h2>¿Qué hacen exactamente?</h2>
-  <p>Operamos tu cold email B2B de punta a punta. Definimos a quién atacar —cargo, sector, tamaño de empresa y país—, construimos la lista con filtros reales en vez de comprar bases sucias, y escribimos secuencias personalizadas por nicho, no plantillas. Montamos la infraestructura de envío con dominios y buzones dedicados, lanzamos las campañas, hacemos pruebas A/B de asunto y ángulo, y clasificamos cada respuesta que llega. Lo único que aterriza en tu bandeja son conversaciones con gente que decide la compra. Tú entras a cerrar; nosotros mantenemos la máquina girando y reportando. Tu equipo no escribe un solo correo ni toca una hoja de cálculo.</p>
+  <h2>Para quién funciona la prospección en frío por correo</h2>
+  <p>Para empresas que venden a otras empresas, cuyo comprador vive en el correo, donde la decisión la toma una sola persona y donde un cliente vale al menos diez mil dólares a lo largo de la relación. Agencias de marketing, software, reclutamiento, consultoras y servicios profesionales suelen encajar. Si el producto es de ticket bajo, masivo o de consumo, el correo en frío no es el mejor canal y se dice en la primera llamada, antes de cobrar nada.</p>
 
-  <h2>¿Me van a quemar el dominio?</h2>
-  <p>No, y el sistema está diseñado justo para que eso nunca pase. Nunca usamos tu dominio principal: montamos dominios y buzones dedicados solo para las campañas, separados de tu correo corporativo. Cada cuenta lleva 21 días de warm-up progresivo antes de mandar un correo a un lead real, y el volumen se escala poco a poco conforme madura la reputación de envío. Mantenemos el bounce por debajo del 2%, el ritmo conservador y revisamos la entregabilidad todos los días. Si una cuenta empieza a flaquear, la sacamos antes de que arrastre a las demás. Tu dominio de siempre queda intacto.</p>
+  <h2>Dónde operamos y en qué registro</h2>
+  <p>España y LATAM. El registro del copy lo manda el mercado al que se escribe, no el país donde está la empresa que contrata: castellano peninsular para España, castellano adaptado para México, Chile, Colombia y el resto de la región. Un mismo cliente puede tener campañas en los dos a la vez.</p>
 
-  <h2>¿En cuánto tiempo empiezan a caer reuniones?</h2>
-  <p>El rango normal son las primeras 2 a 3 semanas, aunque depende del nicho y de qué tan afilado esté tu cliente ideal. El mes 1 es setup y la primera oleada a volumen bajo, mientras los dominios terminan de calentarse. El mes 2 y 3 es donde el sistema entra en régimen: las campañas ya están afinadas con datos reales y las reuniones empiezan a caer de forma constante. No te voy a prometer veinte reuniones la primera semana —quien te promete eso, miente—. Te prometo un sistema que, una vez calibrado, produce conversaciones de negocio mes tras mes.</p>
+  <h2>Precio</h2>
+  <p>450 € al mes más 350 € de arranque en España, y las mismas cifras en dólares para México y LATAM. El arranque es un pago único que cubre dominios, buzones y el calentamiento. Sin permanencia: si a los sesenta días no hay tracción real, se corta sin penalización.</p>
 
-  <h2>¿Qué necesitan de mí?</h2>
-  <p>Poco, y casi todo en una sola llamada de diagnóstico de 20 minutos. Necesito que me cuentes a fondo tu cliente ideal y tu oferta —qué vendes, a quién y por qué te eligen— y acceso para crear los dominios y correos auxiliares. Validamos juntos el mensaje y el ángulo antes de lanzar nada, así que tienes la última palabra sobre cómo suena tu marca. No te pido listas de contactos, ni plantillas, ni que tú escribas los correos: de todo eso me encargo yo. A partir del lanzamiento, tu única tarea es presentarte a las reuniones que se agenden.</p>
-
-  <h2>¿Les funciona cualquier sector?</h2>
-  <p>No, y prefiero decírtelo de frente antes de cobrarte. El filtro es claro: B2B que le vende a otras empresas, con ticket medio por arriba de unos 3,000 USD/mes o un ciclo de venta consultivo. Agencias, software, reclutamiento, consultoras y servicios profesionales encajan muy bien porque ahí una sola reunión puede valer miles. Si tu producto es de ticket bajo, masivo o B2C, el cold email no es tu mejor canal y te lo digo en la llamada en lugar de venderte algo que no te va a funcionar. Y si conozco a alguien que sí trabaja tu caso, te lo paso.</p>
-
-  <h2>¿Cuánto cuesta?</h2>
-  <p>La inversión arranca en 600 € al mes, más una cuota de setup única que cubre toda la infraestructura —dominios, buzones y los 21 días de warm-up—. El número final depende del volumen de buzones, de cuántos países ataques y de tu ciclo de venta, así que te lo cierro concreto en la llamada. No bajo el precio para cerrar, pero tampoco te amarro con contratos largos: si a los 60 días no hay tracción real, nos salimos sin drama. La forma sana de verlo: con que cierres un cliente, el servicio normalmente ya se pagó solo.</p>
-
-  <h2>¿Y si ya tengo SDR interno?</h2>
-  <p>Mejor todavía, porque se suman. Un SDR caro se quema haciendo la parte mecánica: armar listas, buscar correos, mandar secuencias y perseguir follow-ups. Eso es justo lo que el sistema hace en automático y a escala. Nosotros le llenamos el calendario de reuniones calificadas y él se dedica a lo único que de verdad mueve la aguja: hablar con prospectos y cerrar. No reemplazo a tu equipo comercial, lo alimento para que pase el día vendiendo en vez de en hojas de cálculo. Si todavía no tienes SDR, el sistema te da el flujo de reuniones sin que tengas que contratar uno aún.</p>
-
-  <h2>¿Mandan reportes?</h2>
-  <p>Sí, y suele ser la parte que más se agradece. Tienes un dashboard con los números que de verdad importan —correos enviados, aperturas, respuestas y reuniones agendadas— y cada respuesta llega ya clasificada: interesado, tibio, no interesado, fuera de oficina o rebote, para que priorices a quién contestar primero. Cada quince días tenemos una llamada para revisar qué está funcionando y ajustar mensaje, ICP y volumen según lo que dicen los datos. Iteramos con números, no con corazonadas. En ningún momento te quedas adivinando si el sistema está dando resultados ni en qué se está yendo tu inversión.</p>
-
-  <p>¿Hablamos? Escríbenos a <a href="mailto:gael@prospectlab21.com">gael@prospectlab21.com</a>.</p>
+  <p>Para hablar, escribe a <a href="mailto:gael@prospectlab21.com">gael@prospectlab21.com</a> o agenda veinte minutos en <a href="https://call.prospectlab21.com">call.prospectlab21.com</a>.</p>
+  <p class="seo-mercados">ProspectLab21 · Cold email B2B · España, México, Chile, Colombia y LATAM · Fundada por Gael Sosa</p>
 </main>
 
 <noscript>
   <div class="no-js-warn" style="display:block;padding:32px;background:#000;color:#fff;font-family:Inter,sans-serif;text-align:center">
-    <h1 style="font-family:Space Grotesk,sans-serif">ProspectLab21 — Cold email B2B</h1>
-    <p>Esta web usa JavaScript para las animaciones. Si quieres hablar con nosotros, escribe a <a href="mailto:gael@prospectlab21.com" style="color:#5c85ff">gael@prospectlab21.com</a>.</p>
+    <h1 style="font-family:Space Grotesk,sans-serif">ProspectLab21, agencia de cold email B2B</h1>
+    <p>Esta web usa JavaScript para las animaciones. Si prefieres hablar directo, escribe a <a href="mailto:gael@prospectlab21.com" style="color:#5c85ff">gael@prospectlab21.com</a>.</p>
   </div>
 </noscript>
 
@@ -225,6 +203,6 @@
 <script defer src="/_vercel/insights/script.js"></script>
 <script defer src="/_vercel/speed-insights/script.js"></script>
 
-<script src="scripts/app.js?v=27" defer></script>
+<script src="scripts/app.js?v=28" defer></script>
 </body>
 </html>
